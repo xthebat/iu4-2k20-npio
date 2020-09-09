@@ -1,7 +1,7 @@
 package ru.bmstu.iu4.task01
 
 fun IntArray.printArray(){
-    for ((index, value) in this.withIndex())
+    for ((index, value) in withIndex())
         println("[$index]: $value")
 }
 
@@ -17,17 +17,17 @@ fun IntArray.bubbleSortIncrease(): IntArray{
 }
 
 fun IntArray.quickSortDecrease(){
-    var startIndex: Int = 0
-    var endIndex: Int = this.lastIndex
+    var startIndex = 0
+    var endIndex = this.lastIndex
     makeSort(this, startIndex, endIndex)
 }
 
 fun makeSort(array: IntArray, startIndex: Int, endIndex: Int){
     if (startIndex >= endIndex)
         return
-    var i: Int = startIndex
-    var j: Int = endIndex
-    var curr: Int = i - (i - j) / 2
+    var i = startIndex
+    var j = endIndex
+    var curr = i - (i - j) / 2
     while (i < j){
         while (i < curr && (array[i] >= array[curr])) {
             i++

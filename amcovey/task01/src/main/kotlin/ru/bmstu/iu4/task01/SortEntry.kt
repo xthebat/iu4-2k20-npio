@@ -3,7 +3,7 @@ package ru.bmstu.iu4.task01
 object SortEntry {
     @JvmStatic
     fun main(args: Array<String>) {
-        val x: IntArray = intArrayOf(1, 200, 3, 6, 0, 100, 15, 10)
+        val x = intArrayOf(1, 200, 3, 6, 0, 100, 15, 10)
         println("Initial Array")
         x.printArray()
         println("Bubble Sort Increase")
