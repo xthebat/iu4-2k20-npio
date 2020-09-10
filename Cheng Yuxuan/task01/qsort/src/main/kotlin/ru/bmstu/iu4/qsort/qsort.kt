@@ -1,27 +1,27 @@
-package ru.bmstu.iu4.qsort
+fun quick_sort(A: Array<Int>, p: Int, r: Int) {
+    if (p < r) {
+        var q: Int = partition(A, p, r)
+        quick_sort(A, p, q - 1)
+        quick_sort(A, q + 1, r)
 
-object qsort {
-    @JvmStatic
+    }
+}
 
-    fun main(args: Array<String>) {
-        var temp: Int = 0
-            var  IntArray = arrayOf(1, 9, 2, 13, 18, 7, 9, 27)
-            for (i in 0 .. IntArray.size - 1) {
-                for (j in 0..IntArray.size - 1) {
-                    if (j < IntArray.size - 1) {
-                        if (IntArray[j] > IntArray[j + 1]) {
-                            if (j < IntArray.size - 1) {
-                                temp = IntArray[j]
-                                IntArray[j] = IntArray[j + 1]
-                                IntArray[j + 1] = temp
-                            }
-                        }
-                    }
-                }
-            }
-            for (Number in IntArray)
-            {
-                println(Number)
-            }
+fun partition(A: Array<Int>, p: Int, r: Int): Int {
+    var x = A[r]
+    var i = p - 1
+    for (j in p until r) {
+        if (A[j] <= x) {
+            i++
+            exchange(A, i, j)
         }
+    }
+    exchange(A, i + 1, r)
+    return i + 1
+}
+
+fun exchange(A: Array<Int>, i: Int, j: Int) {
+    var temp = A[i]
+    A[i] = A[j]
+    A[j] = temp
 }
