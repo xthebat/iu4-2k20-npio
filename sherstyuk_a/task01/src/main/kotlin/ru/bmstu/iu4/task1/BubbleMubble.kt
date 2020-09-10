@@ -1,11 +1,18 @@
 package ru.bmstu.iu4.task1
 
+import ru.inforion.lab403.common.logging.FINEST
+import ru.inforion.lab403.common.logging.logger
+
+
 object BubbleMubble {
+    val log = logger(FINEST)
+
     @JvmStatic
     fun main(args: Array<String>) {
         val data = intArrayOf(6,2,0,8,3,5,7)
+        log.config { "Input data: ${data.toList()}" }
         myBubbleSort(data)
-        for (i in data) print("$i, ")
+        log.fine { "Sorted Data: ${data.toList()}" }
     }
 
     fun myBubbleSort(data: IntArray) {
@@ -18,5 +25,6 @@ object BubbleMubble {
                 }
             }
         }
+        log.info { "Data sorted!" }
     }
 }
