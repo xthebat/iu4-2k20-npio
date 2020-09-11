@@ -1,17 +1,14 @@
 package ru.bmstu.iu4.testqsort
-
-import jdk.nashorn.internal.objects.NativeRegExp.test
 import org.junit.Test
-import ru.bmstu.iu4.qsort.qSort
+import quick_sort
 import kotlin.test.assertEquals
 
-internal class QSortKtTest {
-
+internal class TestQuicksort {
     @Test
     fun qSortTest() {
-        val testArray: Array<Int> = arrayOf(1,23,24,54,643,1,3)
-        val rightArray: Array<Int> = arrayOf(1,1,3,23,24,54,643)
-        val resultArray: Array<Int> = qSort(testArray, 0, testArray.lastIndex)
+        val testArray: Array<Int> = arrayOf(452,2,24,84,21,1)
+        val rightArray: Array<Int> = arrayOf(1,2,21,24,84,452)
+        val resultArray: Array<Int> = quick_sort(testArray, 0, testArray.lastIndex)
         for ((index, value) in rightArray.withIndex()){
             assertEquals(value, resultArray[index])
         }
