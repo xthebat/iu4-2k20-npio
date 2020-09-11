@@ -10,5 +10,7 @@ repositories {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.4.10'
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-test', version: '1.4.10'
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-test-junit', version: '1.4.10'
 }
