@@ -9,14 +9,14 @@ object Quick_sortStart {
         val n = readLine()!!.toInt()
 
         println("Enter elements : ")
-        val A = Array(n, { 0 })
+        val myArray = Array(n, { 0 })
         for (i in 0 until n)
-            A[i] = readLine()!!.toInt()
+            myArray[i] = readLine()!!.toInt()
 
-        quick_sort(A, 0, A.size - 1)
+        quick_sort(myArray, 0, myArray.size - 1)
 
         println("Sorted array is : ")
         for (i in 0 until n)
-            print("${A[i]}  ")
+            print("${myArray[i]}  ")
     }
 }
