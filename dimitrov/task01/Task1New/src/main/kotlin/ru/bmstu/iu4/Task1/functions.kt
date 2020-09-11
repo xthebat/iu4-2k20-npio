@@ -2,6 +2,12 @@ package ru.bmstu.iu4.Task1
 
 import java.security.KeyStore
 
+fun unittest(): List<Int> {
+    val testlist = listOf<Int>(5, 7, 2, 8)
+    val sorttesttlist = sorting(testlist)
+    return sorttesttlist
+}
+
 fun convert(array: Array<String>): List<Int> {
     val result = mutableListOf<Int>()
     for (item in array) result.add(item.toInt())

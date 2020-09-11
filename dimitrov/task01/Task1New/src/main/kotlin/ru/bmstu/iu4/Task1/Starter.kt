@@ -16,7 +16,9 @@ object Starter {
             log.severe { "Can't convert" }
             exitProcess(-1)
         }
+        log.info { "Input array: $list" }
         log.info { "Size of array: ${arraySize(list)}" }
         log.info { "Sorting array: ${sorting(list)}" }
+        log.info { "Unit test, input array: 5 7 2 8, sort: ${unittest()}"}
     }
 }
