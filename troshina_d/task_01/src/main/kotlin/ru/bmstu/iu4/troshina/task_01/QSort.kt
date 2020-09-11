@@ -31,14 +31,15 @@ fun qSort(myArray: Array<Int>, leftIndex: Int, rightIndex: Int): Array<Int> {
     return myArray
 }
 
-fun makeArray():Array<Int> {
-    println("Insert number of elements in array")
-    val num = try {
-        readLine()!!.toInt()
-    } catch(e: java.lang.NumberFormatException){
-        println("Wrong input")
+
+
+fun Array<String>.convertStrings2Ints(): Array<Int> {
+    if(this.isEmpty()){
         return arrayOf(0)
     }
-    println("Insert $num numbers")
-    return Array(num) {(readLine()!!.toInt())}
+    val result = Array(this.size) { 0 }
+    for(k in this.indices){
+        result[k] = this[k].toInt()
+    }
+    return result
 }

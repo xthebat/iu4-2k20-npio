@@ -15,4 +15,21 @@ internal class QSortKtTest {
         Assert.assertArrayEquals(resultArray,rightArray)
 
     }
+
+    @Test
+    fun convertStrings2IntTest() {
+
+        val str = arrayOf("22", "12", "0")
+        val num = arrayOf(22, 12, 0)
+        Assert.assertArrayEquals(num, str.convertStrings2Ints())
+    }
+
+    @Test
+    fun returnArrayOf0(){
+
+        val str = emptyArray<String>()
+        val num = arrayOf(0)
+        Assert.assertArrayEquals(num, str.convertStrings2Ints())
+
+    }
 }
