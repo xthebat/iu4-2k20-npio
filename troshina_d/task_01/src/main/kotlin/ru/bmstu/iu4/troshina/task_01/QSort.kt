@@ -1,11 +1,9 @@
 package ru.bmstu.iu4.troshina.task_01
-import java.util.*
-val scan = Scanner(System.`in`)
 
 fun qSort(myArray: Array<Int>, leftIndex: Int, rightIndex: Int): Array<Int> {
     var startIndex = leftIndex
     var endIndex = rightIndex
-    val cur: Int = myArray[(startIndex + endIndex) / 2]
+    val cur = myArray[(startIndex + endIndex) / 2]
 
     do {
         while (myArray[startIndex] < cur) {
@@ -20,24 +18,27 @@ fun qSort(myArray: Array<Int>, leftIndex: Int, rightIndex: Int): Array<Int> {
                 myArray[startIndex] = myArray[endIndex]
                 myArray[endIndex] = tmp
             }
-            startIndex++;
-            endIndex--;
+            startIndex++
+            endIndex--
         }
     } while (startIndex <= endIndex)
     if (startIndex < rightIndex) {
-        qSort(myArray, startIndex, rightIndex);
+        qSort(myArray, startIndex, rightIndex)
     }
     if (leftIndex < endIndex) {
-        qSort(myArray, leftIndex, endIndex);
+        qSort(myArray, leftIndex, endIndex)
     }
     return myArray
 }
 
-fun makeArray():Array<Int>{
-    var myArray = emptyArray<Int>()
-    while (scan.hasNextInt()) {
-        myArray += scan.nextInt()
-        scan.nextLine()
+fun makeArray():Array<Int> {
+    println("Insert number of elements in array")
+    val num = try {
+        readLine()!!.toInt()
+    } catch(e: java.lang.NumberFormatException){
+        println("Wrong input")
+        return arrayOf(0)
     }
-    return myArray
+    println("Insert $num numbers")
+    return Array(num) {(readLine()!!.toInt())}
 }
