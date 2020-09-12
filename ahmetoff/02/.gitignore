@@ -1,0 +1,5 @@
+#Task-01
+/.gradle
+/.idea
+/gradle.properties
+/build
