@@ -1,5 +1,9 @@
 package ru.bmstu.iu4.task02
 
+typealias Vector  = ArrayList<Float>;
+typealias VectorStr = Vector;
+typealias VectorCol = Vector;
+
 /* Vector-maker  */
 
 fun vectorOf(v: String): Vector{
@@ -57,6 +61,7 @@ infix fun VectorStr.crossms(B: Matrix2D) : Matrix2D{
 /* Vector standart operators funcs */
 
 operator fun Vector.plus(B: Vector): Vector{
+    require(B.size == this.size) {"Vectors length different"}
     for (k in this.indices)
             this[k] += B[k];
     return this
@@ -69,6 +74,7 @@ operator fun Vector.plus(B: Float): Vector{
 }
 
 operator fun Vector.minus(B: Vector): Vector{
+    require(B.size == this.size) {"Vectors length different"}
     for (k in this.indices)
         this[k] -= B[k];
     return this
@@ -81,6 +87,7 @@ operator fun Vector.minus(B: Float): Vector{
 }
 
 operator fun Vector.times(B: Vector): Vector{
+    require(B.size == this.size) {"Vectors length different"}
     for (k in this.indices)
         this[k] *= B[k];
     return this;

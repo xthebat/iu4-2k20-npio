@@ -1,5 +1,8 @@
 package ru.bmstu.iu4.task02
 
+typealias Matrix = ArrayList<Vector>;
+typealias Matrix2D = Matrix;
+
 /* Matrix-maker */
 
 fun matrixOf(mat: List<String>): Matrix{
@@ -13,7 +16,6 @@ fun matrixOf(mat: List<String>): Matrix{
         }
         res.add(mat_part)
     }
-
     return res
 
 }
