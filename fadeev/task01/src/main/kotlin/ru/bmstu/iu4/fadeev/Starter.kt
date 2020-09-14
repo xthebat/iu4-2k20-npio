@@ -1,7 +1,13 @@
 package ru.bmstu.iu4.fadeev
 
+import ru.inforion.lab403.common.logging.FINE
+import ru.inforion.lab403.common.logging.FINEST
+import ru.inforion.lab403.common.logging.logger
+
 object Starter {
+    val log = logger(FINEST)
     @JvmStatic
+
     fun main(args: Array<String>) {
 
         println("Hello world!")
@@ -12,12 +18,12 @@ object Starter {
         val m = 0
         val b = inArr.size-1
 
-        println("Input array:")
+        log.fine { "\nInput array:" }
         println(inArr.contentToString())
 
         qsort(inArr, m, b)
 
-        println("Output array:")
+        log.finest {"\nOutput array:"}
         println(inArr.contentToString())
 
     }
