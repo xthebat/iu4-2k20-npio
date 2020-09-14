@@ -1,6 +1,0 @@
-#gitignore
-.gradle
-.idea
-build
-*.bin
-*.iml
