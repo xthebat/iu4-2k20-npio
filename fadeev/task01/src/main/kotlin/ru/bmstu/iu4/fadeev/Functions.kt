@@ -1,6 +1,6 @@
 package ru.bmstu.iu4.fadeev
 
-fun qsort(sArr: IntArray, m: Int, b: Int) {
+fun qsort(sArr: ArrayList<Int>, m: Int, b: Int) {
 
     val med = (m+b)/2
     val osn = sArr[med]
@@ -35,7 +35,7 @@ fun qsort(sArr: IntArray, m: Int, b: Int) {
     }
 }
 
-fun swap(sArr: IntArray, i: Int, j: Int ){
+fun swap(sArr: ArrayList<Int>, i: Int, j: Int ){
 
     val temp: Int = sArr[i]
 

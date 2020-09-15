@@ -10,21 +10,19 @@ object Starter {
 
     fun main(args: Array<String>) {
 
-        println("Hello world!")
+        println("Hello qsort!")
 
         val s = (0..99).shuffled().take(10)
-        val inArr = s.toIntArray()
+        val inArr: ArrayList<Int> = s as ArrayList<Int>
 
         val m = 0
         val b = inArr.size-1
 
-        log.fine { "\nInput array:" }
-        println(inArr.contentToString())
+        log.fine { "Input array:  $inArr" }
 
         qsort(inArr, m, b)
 
-        log.finest {"\nOutput array:"}
-        println(inArr.contentToString())
+        log.finest { "Output array: $inArr" }
 
     }
 }
