@@ -1,0 +1,7 @@
+# IntellijIdea files
+*.iml
+.idea
+.gradle
+.DS_Store
+build
+out
