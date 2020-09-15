@@ -13,25 +13,25 @@ typealias Mat = List<Vec>
 object matrixFuncs {
     val log = logger(FINEST)
 
-    infix fun Mat.plus(other: Mat): Mat{
+    operator fun Mat.plus(other: Mat): Mat{
 
         matCheckSize(this, other)
         val resMat = mutableListOf<Vec>()
         var row: Vec
         for (i in indices) {
-            row = this[i] plus other[i]
+            row = this[i] + other[i]
             resMat.add(row)
         }
         return resMat
     }
 
-    infix fun Mat.minus(other: Mat): Mat{
+    operator fun Mat.minus(other: Mat): Mat{
 
         matCheckSize(this, other)
         val resMat = mutableListOf<Vec>()
         var row: Vec
         for (i in indices) {
-            row = this[i] minus other[i]
+            row = this[i] - other[i]
             resMat.add(row)
         }
         return resMat

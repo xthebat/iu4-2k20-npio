@@ -7,6 +7,7 @@ import ru.bmstu.iu4.task02.matrixFuncs.cross
 import ru.bmstu.iu4.task02.matrixFuncs.crossVec
 import ru.bmstu.iu4.task02.matrixFuncs.plus
 import ru.bmstu.iu4.task02.matrixFuncs.transpose
+import ru.bmstu.iu4.task02.vectorFuncs.cross
 import ru.bmstu.iu4.task02.vectorFuncs.equals
 import ru.bmstu.iu4.task02.vectorFuncs.minus
 import ru.bmstu.iu4.task02.vectorFuncs.plus
@@ -20,7 +21,7 @@ internal class vecFuncsTest {
     fun vecPlus() {
         val vec1: Vec = listOf(1.0, 2.5, 3.0)
         val vec2: Vec = listOf(1.0, 2.5, 3.0)
-        val vecSum = vec1 plus vec2
+        val vecSum = vec1 + vec2
         val res: Vec = listOf(2.0, 5.0, 6.0)
         assertEquals(res, vecSum, "Plus Err")
     }
@@ -29,7 +30,7 @@ internal class vecFuncsTest {
     fun vecMinus() {
         val vec1: Vec = listOf(1.0, 2.5, 3.0)
         val vec2: Vec = listOf(1.0, 2.5, 3.0)
-        val vecMin = vec1 minus vec2
+        val vecMin = vec1 - vec2
         val res: Vec = listOf(0.0, 0.0, 0.0)
         assertEquals(res, vecMin, "Minus Err")
     }
@@ -57,6 +58,15 @@ internal class vecFuncsTest {
         val res = vec1 dot vec2
         assertEquals(12.0, res, "Dot False Err")
     }
+
+    @Test
+    fun vecCross() {
+        val vec1: Vec = listOf(1.0, 2.0, 3.0)
+        val vec2: Vec = listOf(1.0, 2.0, 4.0)
+        val res = listOf<Double>(2.0, -1.0, 0.0)
+
+        assertEquals(res, vec1 cross vec2)
+    }
 }
 
 internal class matFuncsTest {
@@ -65,7 +75,7 @@ internal class matFuncsTest {
     fun matPlus() {
         val row: Vec = listOf(1.0, 2.0, 3.0)
         val mat: Mat = listOf(row, row, row)
-        val matSum = mat plus mat
+        val matSum = mat + mat
         val res: Mat = listOf(listOf(2.0, 4.0, 6.0),
             listOf(2.0, 4.0, 6.0),
             listOf(2.0, 4.0, 6.0))
@@ -77,7 +87,7 @@ internal class matFuncsTest {
     fun matMinus() {
         val row: Vec = listOf(1.0, 2.0, 3.0)
         val mat: Mat = listOf(row, row, row)
-        val matMin = mat minus mat
+        val matMin = mat - mat
         val res: Mat = listOf(listOf(0.0, 0.0, 0.0),
             listOf(0.0, 0.0, 0.0),
             listOf(0.0, 0.0, 0.0))

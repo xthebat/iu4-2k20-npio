@@ -9,7 +9,7 @@ typealias Vec = List<Double>
 object vectorFuncs {
     val log = logger(FINEST)
 
-    infix fun Vec.plus(other: Vec): Vec{
+    operator fun Vec.plus(other: Vec): Vec{
         vecCheck(this, other)
 
         val resVec = mutableListOf<Double>()
@@ -18,7 +18,7 @@ object vectorFuncs {
         }
         return resVec
     }
-    infix fun Vec.minus(other: Vec): Vec{
+    operator fun Vec.minus(other: Vec): Vec{
 
         vecCheck(this, other)
 
@@ -47,6 +47,27 @@ object vectorFuncs {
         }
         return res
     }
+
+
+    infix fun Vec.cross(other: Vec): Vec {
+        vecCheck(this, other)
+        if (this.count() > 3) {
+            log.warning { "Size of vector is bigger than 3" }
+            exitProcess(-1)
+        }
+
+        val resVec = mutableListOf<Double>()
+
+        val item1 = this[1]*other[2]-this[2]*other[1]
+        val item2 = -(this[0]*other[2]-this[2]*other[0])
+        val item3 = this[0]*other[1]-this[1]*other[0]
+        resVec.add(item1)
+        resVec.add(item2)
+        resVec.add(item3)
+
+        return resVec
+    }
+
     private fun vecCheck(vec1: Vec, vec2: Vec) {
         val vec1Size = vec1.count()
         val vec2Size = vec2.count()
@@ -56,9 +77,4 @@ object vectorFuncs {
             exitProcess(-1)
         }
     }
-
-    /*   infix fun Vec.cross(other: Vec) {
-
-
-       }*/
 }
