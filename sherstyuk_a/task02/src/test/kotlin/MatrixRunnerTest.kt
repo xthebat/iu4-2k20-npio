@@ -4,7 +4,6 @@ import org.junit.Test
 import ru.bmstu.iu4.task02.matrixFuncs.equals
 import ru.bmstu.iu4.task02.matrixFuncs.minus
 import ru.bmstu.iu4.task02.matrixFuncs.cross
-import ru.bmstu.iu4.task02.matrixFuncs.crossVec
 import ru.bmstu.iu4.task02.matrixFuncs.plus
 import ru.bmstu.iu4.task02.matrixFuncs.transpose
 import ru.bmstu.iu4.task02.vectorFuncs.cross
@@ -148,6 +147,6 @@ internal class matFuncsTest {
             listOf(14.0),
             listOf(14.0))
 
-        assertEquals(resMat, mat crossVec row)
+        assertEquals(resMat, mat cross row)
     }
 }

@@ -2,7 +2,6 @@ package ru.bmstu.iu4.task02
 
 import ru.inforion.lab403.common.logging.FINEST
 import ru.inforion.lab403.common.logging.logger
-import kotlin.system.exitProcess
 
 typealias Vec = List<Double>
 
@@ -10,51 +9,49 @@ object vectorFuncs {
     val log = logger(FINEST)
 
     operator fun Vec.plus(other: Vec): Vec{
-        vecCheck(this, other)
+        require(this.count() == other.count()) {"Size of vectors should be equal"}
 
         val resVec = mutableListOf<Double>()
         for (i in indices) {
             resVec.add(this[i] + other[i])
         }
+
         return resVec
     }
     operator fun Vec.minus(other: Vec): Vec{
-
-        vecCheck(this, other)
+        require(this.count() == other.count()) {"Size of vectors should be equal"}
 
         val resVec = mutableListOf<Double>()
-
         for (i in indices) {
             resVec.add(this[i] - other[i])
         }
+
         return resVec
     }
     infix fun Vec.equals(other: Vec): Boolean {
-        vecCheck(this, other)
+        require(this.count() == other.count()) {"Size of vectors should be equal"}
+
         for (i in indices) {
             if (this[i] != other[i]) {
                 return false
             }
         }
+
         return true
     }
     infix fun Vec.dot(other: Vec): Double {
-        vecCheck(this, other)
+        require(this.count() == other.count()) {"Size of vectors should be equal"}
 
         var res = 0.0
         for (i in indices) {
             res += this[i] * other[i]
         }
+
         return res
     }
-
-
     infix fun Vec.cross(other: Vec): Vec {
-        vecCheck(this, other)
-        if (this.count() > 3) {
-            log.warning { "Size of vector is bigger than 3" }
-            exitProcess(-1)
-        }
+        require(this.count() == other.count()) {"Size of vectors should be equal"}
+        require(this.count() == 3) {"Size of vector should be 3"}
 
         val resVec = mutableListOf<Double>()
 
@@ -66,15 +63,5 @@ object vectorFuncs {
         resVec.add(item3)
 
         return resVec
-    }
-
-    private fun vecCheck(vec1: Vec, vec2: Vec) {
-        val vec1Size = vec1.count()
-        val vec2Size = vec2.count()
-
-        if (vec1Size != vec2Size) {
-            log.warning { "Different size of vectors" }
-            exitProcess(-1)
-        }
     }
 }
