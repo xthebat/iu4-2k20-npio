@@ -1,9 +1,8 @@
 package ru.bmstu.iu4
 
-fun sort(sortArray: IntArray, leftIndex: Int, rightIndex: Int) {
-    var leftIndexTemp = leftIndex
-    var rightIndexTemp = rightIndex
-    if (leftIndex > rightIndex)
+fun sort(sortArray: IntArray, leftIndexTemp: Int, rightIndexTemp: Int) {
+
+    if (leftIndexTemp > rightIndexTemp)
         return
 
     val cardinalNum = sortArray[leftIndex]
@@ -23,6 +22,6 @@ fun sort(sortArray: IntArray, leftIndex: Int, rightIndex: Int) {
     }
     sortArray[leftIndex] = sortArray[leftIndexTemp]
     sortArray[leftIndexTemp] = cardinalNum
-    sort(sortArray, leftIndex, leftIndexTemp - 1)
-    sort(sortArray, leftIndexTemp + 1, rightIndex)
+    sort(sortArray, leftIndexTemp, leftIndexTemp - 1)
+    sort(sortArray, leftIndexTemp + 1, rightIndexTemp)
 }

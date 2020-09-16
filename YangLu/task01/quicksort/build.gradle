@@ -14,13 +14,9 @@ repositories {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
 
-    implementation 'com.github.inforion:kotlin-logging:v0.2.1'
-    implementation 'com.github.inforion:kotlin-extensions:v0.3.2'
-
-    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.21'
 
     compileKotlin {
-        kotlinOptions.jvmTarget = "11"
+
 
         compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.4.0'
 
