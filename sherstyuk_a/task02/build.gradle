@@ -1,0 +1,26 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.0'
+}
+
+group 'ru.bmstu.iu4.task02'
+version '1.0'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib'
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-test'
+
+    testCompile group: 'org.jetbrains.kotlin', name: 'kotlin-test-junit'
+    testCompile group: 'junit', name: 'junit'
+
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+    implementation 'com.github.inforion:kotlin-logging:v0.2.1'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "11"
+}
