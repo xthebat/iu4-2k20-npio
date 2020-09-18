@@ -3,7 +3,6 @@ plugins {
 }
 
 group 'ru.bmstu.iu4.task01'
-version '1.0'
 
 repositories {
     mavenCentral()
@@ -18,8 +17,8 @@ dependencies {
 }
 
 compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
 }
 compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
 }
