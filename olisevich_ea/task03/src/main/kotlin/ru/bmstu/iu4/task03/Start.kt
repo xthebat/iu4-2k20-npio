@@ -24,8 +24,9 @@ object Start {
             tab.rowAdd("${it.name.replace(" ", "_")} ${it.gender} ${it.age} ${it.company} ${it.balance}")
         }
 
-        tab.initTable().printTable()
+        val res = tab.initTable().printTable()
 
+        File("output.txt").writeText(res)
     }
 
 }

@@ -41,8 +41,10 @@ fun ConfigTable.rowAdd(row: String): ConfigTable {
     return this
 }
 
-fun Table.printTable() {
-    this.forEach { it.printRow() }
+fun Table.printTable(): String {
+    var res: String = ""
+    this.forEach { res += it.printRow() }
+    return res
 }
 
 

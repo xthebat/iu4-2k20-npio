@@ -69,14 +69,16 @@ fun ConfigRow.buildRow(): Row {
     return cellRow;
 }
 
-fun Row.printRow() {
+fun Row.printRow(): String {
+    var res: String = "";
     for (j in this[0].indices) {
         for (i in this.indices) {
             for (k in this[i][j].indices) {
-                print(this[i][j][k])
+                res += (this[i][j][k])
             }
 
         }
-        println()
+        res += '\n'
     }
+    return res
 }
