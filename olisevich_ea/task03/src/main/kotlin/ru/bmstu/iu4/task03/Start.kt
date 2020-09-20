@@ -19,14 +19,14 @@ object Start {
 
         println("Person's sum in 20 < age < 30: $$s");
 
-        val tab = createTable("Name Gender Age Company Balance", 9)
+        val tab = createTable("Name Gender Age Company Balance", 15)
         data.forEach {
             tab.rowAdd("${it.name.replace(" ", "_")} ${it.gender} ${it.age} ${it.company} ${it.balance}")
         }
 
         val res = tab.initTable().printTable()
 
-        File("output.txt").writeText(res)
+        File("output1.txt").writeText(res)
     }
 
 }

@@ -6,7 +6,7 @@ import kotlin.math.ceil
  * Enum class with different coloring of table
  */
 enum class LineTypes(val ch: String) {
-    VS("}{"), HS("^^"), NN("  ")
+    VS("|"), HS("_"), NN(" ")
 }
 
 
