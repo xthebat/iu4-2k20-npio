@@ -1,7 +1,6 @@
 package ru.bmstu.iu4.task02
 
 
-
 object Start {
 
 
