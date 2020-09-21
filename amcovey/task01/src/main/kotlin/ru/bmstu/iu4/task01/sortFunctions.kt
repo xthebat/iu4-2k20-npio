@@ -6,8 +6,8 @@ fun IntArray.printArray(){
 }
 
 fun IntArray.bubbleSortIncrease(): IntArray{
-    for (i in 0 until (this.size - 1)){
-        for (j in 0 until (this.size - i - 1)){
+    for (i in 0 until (size - 1)){
+        for (j in 0 until (size - i - 1)){
             if (this[j] > this[j + 1]){
                 this[j] = this[j + 1].also { this[j + 1] = this[j] }
             }
@@ -16,10 +16,11 @@ fun IntArray.bubbleSortIncrease(): IntArray{
     return this
 }
 
-fun IntArray.quickSortDecrease(){
+fun IntArray.quickSortDecrease(): IntArray{
     var startIndex = 0
-    var endIndex = this.lastIndex
+    var endIndex = lastIndex
     makeSort(this, startIndex, endIndex)
+    return this
 }
 
 fun makeSort(array: IntArray, startIndex: Int, endIndex: Int){
