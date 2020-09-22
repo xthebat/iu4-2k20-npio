@@ -17,7 +17,8 @@ internal class FunctionsKtTest {
      */
     @Test
     fun calcSumBalanceTest() {
-        val filteredList = filterByAge("../../files/task03/generated.json")
+        val filteredList = readDataFromJson("../../files/task03/generated.json")
+                .filterByAge(20, 30)
         val result = 41190.4F
         assertEquals(result, filteredList.calcSumBalance())
     }

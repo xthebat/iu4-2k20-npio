@@ -6,44 +6,42 @@ import java.io.BufferedWriter
 import java.io.File
 
 data class Person(
-    val _id: String,
-    val index: Int,
-    val guid: String,
-    val isActive: Boolean,
-    val balance: String,
-    val picture: String,
-    val age: Int,
-    val eyeColor: String,
-    val name: String,
-    val gender: String,
-    val company: String,
-    val email: String,
-    val phone: String,
-    val address: String,
-    val about: String,
-    val registered: String,
-    val latitude: Float,
-    val longitude: Float,
-    val tags: Any,
-    val friends: Any,
-    val greeting: String,
-    val favoriteFruit: String
+        val _id: String,
+        val index: Int,
+        val guid: String,
+        val isActive: Boolean,
+        val balance: String,
+        val picture: String,
+        val age: Int,
+        val eyeColor: String,
+        val name: String,
+        val gender: String,
+        val company: String,
+        val email: String,
+        val phone: String,
+        val address: String,
+        val about: String,
+        val registered: String,
+        val latitude: Float,
+        val longitude: Float,
+        val tags: Any,
+        val friends: Any,
+        val greeting: String,
+        val favoriteFruit: String
 )
 
 fun readDataFromJson(inputFilePath: String): List<Person> {
     return inputFilePath.toFile()
-        .readText()
-        .parseJson()
+            .readText()
+            .parseJson()
 }
 
-fun printTableRow(row: String, longestSize: Int, writer: BufferedWriter) {
-    writer.write(row)
-    if (row.length < longestSize + 1) {
-        val countOfSpaces = longestSize - row.length
-        for (i in 0 until countOfSpaces + 1)
-            writer.write(" ")
+fun BufferedWriter.printTableCell(cell: String, longestSize: Int) {
+    write(cell)
+    if (cell.length < longestSize + 1) {
+        repeat(longestSize - cell.length + 1) { write(" ") }
     }
-    writer.write("|")
+    write("|")
 }
 
 fun createTableFromJson(outputFilePath: String, jsonData: List<Person>) {
@@ -54,32 +52,26 @@ fun createTableFromJson(outputFilePath: String, jsonData: List<Person>) {
     val longestBalanceSize = maxOf(jsonData.maxOf { it.balance.length }, "balance: ".length)
 
     val writer = File(outputFilePath).bufferedWriter()
-    printTableRow("name:", longestNameSize, writer)
-    printTableRow("gender:", longestGenderSize, writer)
-    printTableRow("age:", longestAgeSize, writer)
-    printTableRow("company:", longestCompanySize, writer)
-    printTableRow("balance:", longestBalanceSize, writer)
+    writer.printTableCell("name:", longestNameSize)
+    writer.printTableCell("gender:", longestGenderSize)
+    writer.printTableCell("age:", longestAgeSize)
+    writer.printTableCell("company:", longestCompanySize)
+    writer.printTableCell("balance:", longestBalanceSize)
     writer.newLine()
 
-    val namesList = jsonData.map { it.name }
-    val gendersList = jsonData.map { it.gender }
-    val agesList = jsonData.map { it.age }
-    val companiesList = jsonData.map { it.company }
-    val balancesList = jsonData.map { it.balance }
-    for ((index, name) in namesList.withIndex()) {
-        printTableRow(name, longestNameSize, writer)
-        printTableRow(gendersList[index], longestGenderSize, writer)
-        printTableRow(agesList[index].toString(), longestAgeSize, writer)
-        printTableRow(companiesList[index], longestCompanySize, writer)
-        printTableRow(balancesList[index], longestBalanceSize, writer)
+    jsonData.forEach {
+        writer.printTableCell(it.name, longestNameSize)
+        writer.printTableCell(it.gender, longestGenderSize)
+        writer.printTableCell(it.age.toString(), longestAgeSize)
+        writer.printTableCell(it.company, longestCompanySize)
+        writer.printTableCell(it.balance, longestBalanceSize)
         writer.newLine()
     }
     writer.close()
 }
 
-fun filterByAge(inputFilePath: String): List<Person> {
-    val jsonData = readDataFromJson(inputFilePath)
-    return jsonData.filter { (it.age >= 20) && (it.age <= 30) }
+fun List<Person>.filterByAge(minAge: Int, maxAge: Int): List<Person> {
+    return filter { (it.age >= minAge) && (it.age <= maxAge) }
 }
 
 fun String.convertString2Float(): Float {
