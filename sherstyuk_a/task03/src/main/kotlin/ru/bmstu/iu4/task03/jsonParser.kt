@@ -7,95 +7,71 @@ import ru.inforion.lab403.common.logging.logger
 import java.io.BufferedWriter
 import java.io.File
 
+
 object Parser {
     val log = logger(FINEST)
-
-    data class PersonImport(
-        val _id: String,
-        val index: Int,
-        val guid: String,
-        val isActive: Boolean,
-        val balance: String,
-        val picture: String,
-        val age: Int,
-        val eyeColor: String,
-        val name: String,
-        val gender: String,
-        val company: String,
-        val email: String,
-        val phone: String,
-        val address: String,
-        val about: String,
-        val registered: String,
-        val latitude: Double,
-        val longitude: Double,
-        val tags: List<String>,
-        val friends: Any,
-        val greeting: String,
-        val favoriteFruit: String
-    )
 
     @JvmStatic
     fun main(args: Array<String>) {
         val path = "..\\..\\files\\task03\\generated.json"
         val data = personsParser(path)
+        val writer = File("coolTable").bufferedWriter()
 
-        createTable(data)
-        calculator(data)
-
-        // name gender age company balance
-        // age 20 .. 30 -> sum balance
+        writer.writeTable(data)
     }
-    fun personsParser(path: String): List<PersonImport> {
+
+    fun personsParser(path: String): List<Person> {
         val file = path.toFile().readText()
         return file.parseJson()
     }
 
-    fun createTable(data: List<PersonImport>) {
-        val writer = File("coolTable").bufferedWriter()
+    fun BufferedWriter.writeTable(data: List<Person>) {
+
         data.forEach {
-            createRow(it, writer)
-            writer.newLine()
+            this.writeRow(it)
+            this.newLine()
         }
-        writer.close()
+        this.close()
     }
 
-    fun createRow(person: PersonImport, row: BufferedWriter) {
 
-//        log.info { person.name }
-        row.write(person.name)
-        printIndent(person.name.length, row)
-        row.write(person.gender)
-        printIndent(person.gender.length, row)
-        row.write(person.age.toString())
-        printIndent(person.age.toString().length, row)
-        row.write(person.company)
-        printIndent(person.company.length, row)
-        row.write(person.balance)
-        printIndent(person.balance.length, row)
+    fun BufferedWriter.writeRow(person: Person) {
+
+        this.write(person.name)
+        this.writeIndent(person.name.length)
+        this.write(person.gender)
+        this.writeIndent(person.gender.length)
+        this.write(person.age.toString())
+        this.writeIndent(person.age.toString().length)
+        this.write(person.company)
+        this.writeIndent(person.company.length)
+        this.write(person.balance)
+        this.writeIndent(person.balance.length)
 
     }
 
-    fun printIndent(length: Int, row: BufferedWriter) {
+    fun BufferedWriter.writeIndent(length: Int) {
         val indent = 20
 
-        for (i in 0 until indent - length) {
-            row.write(" ")
+        repeat(indent - length) {
+            this.write(" ")
+
         }
     }
 
-    fun calculator(data: List<PersonImport>): Float {
-        var balance = 0F
-        data.filter{ it.age in 20..30 }.forEach() {
-            log.info { it.age }
-            log.info { it.balance }
-            balance += converter(it.balance)
+    fun List<Person>.calcBalanceByAge(ageFrom: Int, ageTill: Int ): Double {
+        val balances = mutableListOf<Double>()
+
+        this.filter { it.age in ageFrom..ageTill }.forEach {
+            balances.add(it.balance.converter())
         }
-        return balance
+
+        val finalValue = Math.round(balances.sumByDouble { it } * 100.0) / 100.0
+        return finalValue
     }
 
-    fun converter(string: String): Float {
-        return string.replace("$", "").replace(",", "").toFloat()
+    fun String.converter(): Double {
+        return this.replace("$", "").replace(",", "").toDouble()
     }
 }
 
