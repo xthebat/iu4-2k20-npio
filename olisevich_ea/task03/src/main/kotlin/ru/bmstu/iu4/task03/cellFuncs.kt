@@ -2,22 +2,14 @@ package ru.bmstu.iu4.task03
 
 import kotlin.math.ceil
 
-/**
- * Enum class with different coloring of table
- */
-enum class LineTypes(val ch: String) {
-    VS("|"), HS("_"), NN(" ")
-}
-
-
 typealias CellPattern = MutableList<MutableList<LineTypes>>
 typealias Cell = MutableList<MutableList<String>>
-
 
 /**
  * Build pattern of cell, coloring and filling data.
  * From input [ConfigRow] receive [Cell] for [Row].
  */
+
 fun ConfigRow.buildCell(data: String): Cell {
     val colLen = this.dataLen
     val sy: Int = 2 + colLen
@@ -58,8 +50,8 @@ fun ConfigRow.buildCell(data: String): Cell {
 fun CellPattern.toCell(): Cell {
     val res: Cell = MutableList(this.size) { MutableList(this[0].size) { LineTypes.NN.ch } }
 
-    res.forEachIndexed { str, mutableList ->
-        mutableList.forEachIndexed { col, _ ->
+    res.mapIndexed { str, mutableList ->
+        mutableList.mapIndexed { col, _ ->
             res[str][col] = this[str][col].ch
         }
     }

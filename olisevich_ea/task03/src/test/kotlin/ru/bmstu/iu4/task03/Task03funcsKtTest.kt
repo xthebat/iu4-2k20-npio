@@ -9,8 +9,8 @@ internal class Task03funcsKtTest {
 
     @Test
     fun initCellConfigTest() {
-        val conf: ConfigRow = initRow("name age", 2).bBotDel().bLeftDel().bRightDel().bTopDel()
-        val actual: ConfigRow = ConfigRow(listOf("name", "age"), 2)
+        val conf: ConfigRow = initRow("name age", 2).borderDel("left").borderDel("top").borderDel("right").borderDel("bot")
+        val actual: ConfigRow = ConfigRow(listOf("name", "age"), 2, dataHeight = 2)
         actual.bot = false;
         actual.top = false;
         actual.left = false;

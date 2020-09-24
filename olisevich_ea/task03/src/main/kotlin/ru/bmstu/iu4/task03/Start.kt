@@ -19,9 +19,16 @@ object Start {
 
         println("Person's sum in 20 < age < 30: $$s");
 
-        val tab = createTable("Name Gender Age Company Balance", 15)
+        val tab = createTable("Name Gender Age Company Balance", 13)
         data.forEach {
-            tab.rowAdd("${it.name.replace(" ", "_")} ${it.gender} ${it.age} ${it.company} ${it.balance}")
+            val colsData = mutableListOf<String>()
+            colsData.add(it.name.replace(" ", "_"))
+            colsData.add(it.gender)
+            colsData.add(it.age.toString())
+            colsData.add(it.company)
+            colsData.add(it.balance)
+
+            tab.rowAdd(colsData.joinToString(separator = " ") )
         }
 
         val res = tab.initTable().printTable()
