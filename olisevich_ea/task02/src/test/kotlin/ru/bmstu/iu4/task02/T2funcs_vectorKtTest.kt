@@ -16,7 +16,7 @@ internal class T2funcs_vectorKtTest {
     @Test
     fun vectorDotvector() {
         val v: Vector = vectorOf("1 2 3");
-        val v1: Vector = vectorOf( "1 2 3");
+        val v1: Vector = vectorOf("1 2 3");
         assertEquals(14F, v dot v1)
     }
 
@@ -24,7 +24,7 @@ internal class T2funcs_vectorKtTest {
     fun vectorColDotMatrix() {
         var testmat: Matrix = matrixOf(listOf("1 2", "3 4"))
         val v2: VectorCol = vectorOf("1 2");
-        assertEquals(vectorOf("4 12"), v2 crossmc testmat )
+        assertEquals(vectorOf("4 12"), v2 crossmc testmat)
 
     }
 
@@ -40,7 +40,7 @@ internal class T2funcs_vectorKtTest {
     fun vectorStrDotMatrix() {
         var testmat: Matrix = matrixOf(listOf("1 2"))
         val v2: VectorCol = vectorOf("1 2");
-        assertEquals(matrixOf(listOf("1 2", "2 4")), v2 crossms testmat )
+        assertEquals(matrixOf(listOf("1 2", "2 4")), v2 crossms testmat)
 
     }
 
@@ -83,8 +83,6 @@ internal class T2funcs_vectorKtTest {
         assertEquals(vectorOf("2 4"), vectorOf("1 2") * 2F)
 
     }
-
-
 
 
 }
