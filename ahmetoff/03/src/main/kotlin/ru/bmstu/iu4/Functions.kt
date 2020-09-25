@@ -1,12 +1,14 @@
 package ru.bmstu.iu4
 
-fun Matrix.init() {
+typealias Matrix = MutableList<MutableList<Int>>
+
+fun Matrix.randomInit() {
     val rows = this.size
     val cols = this[0].size
     if (this[rows - 1][cols - 1] != null) {
         for (i in 0 until rows) {
             for (j in 0 until cols) {
-                this[i][j] = (0 until 10).random()
+                this[i][j] = (0 until 9).random()
             }
         }
     }
@@ -17,10 +19,7 @@ fun Matrix.print() {
     val cols = this[0].size
     if (this[rows - 1][cols - 1] != null) {
         for (i in 0 until rows) {
-            for (j in 0 until cols) {
-                print(this[i][j])
-                print(" ")
-            }
+            print(this[i])
             println()
         }
     }
@@ -41,6 +40,9 @@ fun Matrix.summ(matrix1: Matrix, matrix2: Matrix) {
             }
         }
     }
+    else {
+        throw IllegalArgumentException ("Размеры матриц не совпадают")
+    }
 }
 
 fun Matrix.subtr(matrix1: Matrix, matrix2: Matrix) {
@@ -57,6 +59,9 @@ fun Matrix.subtr(matrix1: Matrix, matrix2: Matrix) {
                 }
             }
         }
+    }
+    else {
+        throw IllegalArgumentException ("Размеры матриц не совпадают")
     }
 }
 
@@ -75,6 +80,9 @@ fun Matrix.dotMult(matrix1: Matrix, matrix2: Matrix) {
             }
         }
     }
+    else {
+        throw IllegalArgumentException ("Размеры матриц не совпадают")
+    }
 }
 
 fun Matrix.crossMult(matrix1: Matrix, matrix2: Matrix) {
@@ -92,6 +100,9 @@ fun Matrix.crossMult(matrix1: Matrix, matrix2: Matrix) {
                 }
             }
         }
+    }
+    else {
+        throw IllegalArgumentException ("Неправильно заданы размеры матриц.")
     }
 }
 

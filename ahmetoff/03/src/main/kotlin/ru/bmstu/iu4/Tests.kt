@@ -9,12 +9,12 @@ internal class Tests {
         val cols1 = 3
 
         val matrix1: Matrix = MutableList(rows1, { MutableList(cols1, { 0 }) })
-        matrix1.init()
+        matrix1.randomInit()
         matrix1.print()
         println()
 
         val matrix2: Matrix = MutableList(rows1, { MutableList(cols1, { 0 }) })
-        matrix2.init()
+        matrix2.randomInit()
         matrix2.print()
         println()
 
@@ -30,12 +30,12 @@ internal class Tests {
         val cols1 = 3
 
         val matrix1: Matrix = MutableList(rows1, { MutableList(cols1, { 0 }) })
-        matrix1.init()
+        matrix1.randomInit()
         matrix1.print()
         println()
 
         val matrix2: Matrix = MutableList(rows1, { MutableList(cols1, { 0 }) })
-        matrix2.init()
+        matrix2.randomInit()
         matrix2.print()
         println()
 
@@ -51,12 +51,12 @@ internal class Tests {
         val cols1 = 3
 
         val matrix1: Matrix = MutableList(rows1, { MutableList(cols1, { 0 }) })
-        matrix1.init()
+        matrix1.randomInit()
         matrix1.print()
         println()
 
-        val matrix2: Matrix = MutableList(rows1, { MutableList(cols1, { 0 }) })
-        matrix2.init()
+        val matrix2: Matrix = MutableList(rows1 , { MutableList(cols1, { 0 }) })
+        matrix2.randomInit()
         matrix2.print()
         println()
 
@@ -74,12 +74,12 @@ internal class Tests {
         val cols2 = 3
 
         val matrix1: Matrix = MutableList(rows1, { MutableList(cols1, { 0 }) })
-        matrix1.init()
+        matrix1.randomInit()
         matrix1.print()
         println()
 
         val matrix2: Matrix = MutableList(rows2, { MutableList(cols2, { 0 }) })
-        matrix2.init()
+        matrix2.randomInit()
         matrix2.print()
         println()
 
@@ -95,7 +95,7 @@ internal class Tests {
         val cols1 = 2
 
         val matrix1: Matrix = MutableList(rows1, { MutableList(cols1, { 0 }) })
-        matrix1.init()
+        matrix1.randomInit()
         matrix1.print()
         println()
 

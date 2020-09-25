@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:upstream" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0569d7d3-b1c1-465a-9eb2-1f975c36c368" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Object" />
+        <option value="Kotlin File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2.2\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1hdjqm6AWPrHBxEZNtNA8tj3zh1" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+  </component>
+  <component name="RunManager" selected="JUnit.Tests.testCrossMult">
+    <configuration name="Tests.testCrossMult" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="03.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.bmstu.iu4.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.bmstu.iu4" />
+      <option name="MAIN_CLASS_NAME" value="ru.bmstu.iu4.Tests" />
+      <option name="METHOD_NAME" value="testCrossMult" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tests.testDotMult" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="03.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.bmstu.iu4.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.bmstu.iu4" />
+      <option name="MAIN_CLASS_NAME" value="ru.bmstu.iu4.Tests" />
+      <option name="METHOD_NAME" value="testDotMult" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tests.testSubtr" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="03.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.bmstu.iu4.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.bmstu.iu4" />
+      <option name="MAIN_CLASS_NAME" value="ru.bmstu.iu4.Tests" />
+      <option name="METHOD_NAME" value="testSubtr" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tests.testSumm" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="03.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.bmstu.iu4.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.bmstu.iu4" />
+      <option name="MAIN_CLASS_NAME" value="ru.bmstu.iu4.Tests" />
+      <option name="METHOD_NAME" value="testSumm" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tests.testTransp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="03.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.bmstu.iu4.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.bmstu.iu4" />
+      <option name="MAIN_CLASS_NAME" value="ru.bmstu.iu4.Tests" />
+      <option name="METHOD_NAME" value="testTransp" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.Tests.testCrossMult" />
+        <item itemvalue="JUnit.Tests.testDotMult" />
+        <item itemvalue="JUnit.Tests.testSubtr" />
+        <item itemvalue="JUnit.Tests.testSumm" />
+        <item itemvalue="JUnit.Tests.testTransp" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0569d7d3-b1c1-465a-9eb2-1f975c36c368" name="Default Changelist" comment="" />
+      <created>1600348057492</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1600348057492</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1815" height="246" key="GridCell.Tab.0.bottom" timestamp="1601034527382">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state width="1815" height="246" key="GridCell.Tab.0.bottom/62.0.1858.1080@62.0.1858.1080" timestamp="1601034527382" />
+    <state width="1811" height="246" key="GridCell.Tab.0.bottom/66.0.1854.1080@66.0.1854.1080" timestamp="1600349735067" />
+    <state width="1815" height="246" key="GridCell.Tab.0.center" timestamp="1601034527382">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state width="1815" height="246" key="GridCell.Tab.0.center/62.0.1858.1080@62.0.1858.1080" timestamp="1601034527382" />
+    <state width="1811" height="246" key="GridCell.Tab.0.center/66.0.1854.1080@66.0.1854.1080" timestamp="1600349735067" />
+    <state width="1815" height="246" key="GridCell.Tab.0.left" timestamp="1601034527382">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state width="1815" height="246" key="GridCell.Tab.0.left/62.0.1858.1080@62.0.1858.1080" timestamp="1601034527382" />
+    <state width="1811" height="246" key="GridCell.Tab.0.left/66.0.1854.1080@66.0.1854.1080" timestamp="1600349735067" />
+    <state width="1815" height="246" key="GridCell.Tab.0.right" timestamp="1601034527382">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state width="1815" height="246" key="GridCell.Tab.0.right/62.0.1858.1080@62.0.1858.1080" timestamp="1601034527382" />
+    <state width="1811" height="246" key="GridCell.Tab.0.right/66.0.1854.1080@66.0.1854.1080" timestamp="1600349735067" />
+    <state x="494" y="185" key="SettingsEditor" timestamp="1600348441579">
+      <screen x="66" y="0" width="1854" height="1080" />
+    </state>
+    <state x="494" y="185" key="SettingsEditor/66.0.1854.1080@66.0.1854.1080" timestamp="1600348441579" />
+    <state x="708" y="311" key="refactoring.ChangeSignatureDialog" timestamp="1601033543204">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state x="708" y="311" key="refactoring.ChangeSignatureDialog/62.0.1858.1080@62.0.1858.1080" timestamp="1601033543204" />
+  </component>
+</project>
