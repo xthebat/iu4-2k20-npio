@@ -18,6 +18,7 @@ object Parser {
         val writer = File("coolTable").bufferedWriter()
 
         writer.writeTable(data)
+        writer.close()
     }
 
     fun personsParser(path: String): List<Person> {
@@ -28,41 +29,37 @@ object Parser {
     fun BufferedWriter.writeTable(data: List<Person>) {
 
         data.forEach {
-            this.writeRow(it)
-            this.newLine()
+            writeRow(it)
+            newLine()
         }
-        this.close()
     }
 
 
     fun BufferedWriter.writeRow(person: Person) {
 
-        this.write(person.name)
-        this.writeIndent(person.name.length)
-        this.write(person.gender)
-        this.writeIndent(person.gender.length)
-        this.write(person.age.toString())
-        this.writeIndent(person.age.toString().length)
-        this.write(person.company)
-        this.writeIndent(person.company.length)
-        this.write(person.balance)
-        this.writeIndent(person.balance.length)
+        write(person.name)
+        writeIndent(person.name.length)
+        write(person.gender)
+        writeIndent(person.gender.length)
+        write(person.age.toString())
+        writeIndent(person.age.toString().length)
+        write(person.company)
+        writeIndent(person.company.length)
+        write(person.balance)
+        writeIndent(person.balance.length)
 
     }
 
     fun BufferedWriter.writeIndent(length: Int) {
         val indent = 20
 
-        repeat(indent - length) {
-            this.write(" ")
-
-        }
+        repeat(indent - length) { write(" ") }
     }
 
     fun List<Person>.calcBalanceByAge(ageFrom: Int, ageTill: Int ): Double {
         val balances = mutableListOf<Double>()
 
-        this.filter { it.age in ageFrom..ageTill }.forEach {
+        filter { it.age in ageFrom..ageTill }.forEach {
             balances.add(it.balance.converter())
         }
 
@@ -71,7 +68,7 @@ object Parser {
     }
 
     fun String.converter(): Double {
-        return this.replace("$", "").replace(",", "").toDouble()
+        return replace("$", "").replace(",", "").toDouble()
     }
 }
 
