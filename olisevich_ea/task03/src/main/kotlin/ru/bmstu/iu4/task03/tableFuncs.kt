@@ -1,46 +1,17 @@
 package ru.bmstu.iu4.task03
 
+import kotlin.math.ceil
+
 typealias Table = MutableList<Row>
 
-/**
- * So professional function for building [Table] via [buildRow] from [ConfigTable].
- */
+fun Table.stringify() = joinToString() { it.stringify() }
 
-fun ConfigTable.initTable(): Table {
-    val res: Table = mutableListOf();
-    this.dataTable.mapIndexed() { i, str ->
-        when (i) {
-            this.dataTable.lastIndex -> res.add(initRow(str, this.maxlen).buildRow())
-            else -> res.add(initRow(str, this.maxlen).borderDel("bot").buildRow())
-        }
-    }
-
-    return res
+fun Table.addRow(values: List<String>, dataPerLine: Int): Row {
+    val maxLen = values.maxBy { it.length }?.length ?: dataPerLine
+    val dataHeight = ceil(maxLen / dataPerLine.toFloat()).toInt()
+    val row = values.toRow(dataPerLine, dataHeight)
+    return row.also { add(it) }
 }
 
-/**
- * Create [ConfigTable] to build [Table]
- */
-
-fun createTable(row: String, maxLen: Int): ConfigTable {
-    val conf = ConfigTable(maxLen);
-    conf.dataTable.add(row)
-    return conf
-}
-
-/**
- * Adding row in [ConfigTable] build
- */
-
-fun ConfigTable.rowAdd(row: String): ConfigTable {
-    this.dataTable.add(row)
-    return this
-}
-
-fun Table.printTable(): String {
-    var res: String = ""
-    this.forEach { res += it.printRow() }
-    return res
-}
-
-
+// Actually dataPerLine should be here, but this is extensions :(
+fun table(): Table = mutableListOf()
