@@ -1,7 +1,6 @@
 package ru.bmstu.iu4
 
 import org.junit.Test
-import java.util.*
 import kotlin.test.assertEquals
 
 internal class Tests {
