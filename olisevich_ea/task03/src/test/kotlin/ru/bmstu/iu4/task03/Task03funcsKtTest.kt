@@ -1,53 +1,41 @@
 package ru.bmstu.iu4.task03
 
 import org.junit.Test
-import java.util.regex.Pattern
-import kotlin.math.exp
+import ru.bmstu.iu4.task03.LineTypes.*
 import kotlin.test.assertEquals
 
 internal class Task03funcsKtTest {
 
     @Test
-    fun initCellConfigTest() {
-        val conf: ConfigRow = initRow("name age", 2).borderDel("left").borderDel("top").borderDel("right").borderDel("bot")
-        val actual: ConfigRow = ConfigRow(listOf("name", "age"), 2, dataHeight = 2)
-        actual.bot = false;
-        actual.top = false;
-        actual.left = false;
-        actual.right = false;
-        assertEquals(conf, actual)
-    }
-
-    @Test
     fun makeCellTest(){
-        val cell: Cell = initRow("hi", 5).buildCell("hi")
+        val actual: Cell = listOf("hi").toRow(5, 1).single()
         val expected: Cell = mutableListOf(
-            mutableListOf(LineTypes.NN.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.NN.ch),
-            mutableListOf(LineTypes.VS.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.VS.ch),
-            mutableListOf(LineTypes.VS.ch, LineTypes.NN.ch, "h", "i", LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.VS.ch),
-            mutableListOf(LineTypes.VS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.VS.ch)
-
+            mutableListOf(NN.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, NN.ch),
+            mutableListOf(VS.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, VS.ch),
+            mutableListOf(VS.ch, NN.ch, "h ", "i ", NN.ch, NN.ch, NN.ch, NN.ch, VS.ch),
+            mutableListOf(VS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, VS.ch)
         )
 
-        assertEquals(cell, expected)
+        println(actual.stringify())
+
+        expected.zip(actual).forEach { assertEquals(it.first, it.second) }
     }
 
     @Test
     fun makeRowTest(){
-        val row: Row =  initRow("hi wrld", 8).buildRow()
+        val row: Row =  listOf("hi wrld").toRow(2,8)
         val expected: Row = mutableListOf(
             mutableListOf(
-                mutableListOf(LineTypes.NN.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.NN.ch),
-                mutableListOf(LineTypes.VS.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.VS.ch),
-                mutableListOf(LineTypes.VS.ch, LineTypes.NN.ch, "h", "i", LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.VS.ch),
-                mutableListOf(LineTypes.VS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.VS.ch)
-
+                mutableListOf(NN.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, NN.ch),
+                mutableListOf(VS.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, VS.ch),
+                mutableListOf(VS.ch, NN.ch, "h", "i", NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, VS.ch),
+                mutableListOf(VS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, VS.ch)
             ),
             mutableListOf(
-                mutableListOf(LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.NN.ch),
-                mutableListOf(LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.VS.ch),
-                mutableListOf(LineTypes.NN.ch, "w", "r", "l", "d", LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.VS.ch),
-                mutableListOf(LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.VS.ch)
+                mutableListOf(HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, NN.ch),
+                mutableListOf(NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, VS.ch),
+                mutableListOf(NN.ch, "w", "r", "l", "d", NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, VS.ch),
+                mutableListOf(HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, VS.ch)
 
             )
         )
@@ -56,40 +44,42 @@ internal class Task03funcsKtTest {
     }
 
     @Test
-    fun makeTableTest(){
-        val tab = createTable("hi wrld", 8).rowAdd("its me").initTable()
-        val expected: Table = mutableListOf(
+    fun makeTableTest() {
 
+        val tab = table().also {
+            it.addRow(listOf("hi", "wrld"), 8)
+            it.addRow(listOf("its", "me"), 8)
+        }
+
+        val expected: Table = mutableListOf(
             mutableListOf(
                 mutableListOf(
-                    mutableListOf(LineTypes.NN.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.NN.ch),
-                    mutableListOf(LineTypes.VS.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.VS.ch),
-                    mutableListOf(LineTypes.VS.ch, LineTypes.NN.ch, "h", "i", LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.VS.ch),
-                    mutableListOf(LineTypes.VS.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.VS.ch)
+                    mutableListOf(NN.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, NN.ch),
+                    mutableListOf(VS.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, VS.ch),
+                    mutableListOf(VS.ch, NN.ch, "h", "i", NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, VS.ch),
+                    mutableListOf(VS.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, VS.ch)
 
                 ),
                 mutableListOf(
-                    mutableListOf(LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.NN.ch),
-                    mutableListOf(LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.VS.ch),
-                    mutableListOf(LineTypes.NN.ch, "w", "r", "l", "d", LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.VS.ch),
-                    mutableListOf(LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.VS.ch)
+                    mutableListOf(HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, NN.ch),
+                    mutableListOf(NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, VS.ch),
+                    mutableListOf(NN.ch, "w", "r", "l", "d", NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, VS.ch),
+                    mutableListOf(NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, VS.ch)
 
                 )
             ),
             mutableListOf(
                 mutableListOf(
-                    mutableListOf(LineTypes.NN.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.NN.ch),
-                    mutableListOf(LineTypes.VS.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.VS.ch),
-                    mutableListOf(LineTypes.VS.ch, LineTypes.NN.ch, "i", "t", "s", LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.VS.ch),
-                    mutableListOf(LineTypes.VS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.VS.ch)
-
+                    mutableListOf(NN.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, NN.ch),
+                    mutableListOf(VS.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, VS.ch),
+                    mutableListOf(VS.ch, NN.ch, "i", "t", "s", NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, VS.ch),
+                    mutableListOf(VS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, VS.ch)
                 ),
                 mutableListOf(
-                    mutableListOf(LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.NN.ch),
-                    mutableListOf(LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.VS.ch),
-                    mutableListOf(LineTypes.NN.ch, "m", "e", LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.NN.ch, LineTypes.VS.ch),
-                    mutableListOf(LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.HS.ch, LineTypes.VS.ch)
-
+                    mutableListOf(HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, NN.ch),
+                    mutableListOf(NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, VS.ch),
+                    mutableListOf(NN.ch, "m", "e", NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, NN.ch, VS.ch),
+                    mutableListOf(HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, HS.ch, VS.ch)
                 )
             )
         )
