@@ -1,0 +1,30 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.10'
+}
+
+group 'ru.bmstu.iu4.Sem04'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'junit:junit:4.12'
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.4.10'
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-test', version: '1.4.10'
+
+    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: '2.11.2'
+
+    compile group: 'com.github.inforion', name: 'kotlin-logging', version: '0.2.2'
+    compile group: 'com.github.inforion', name: 'kotlin-extensions', version: '0.3.3'
+
+    testCompile group: 'junit', name: 'junit', version: '4.13'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "13"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "13"
+}
