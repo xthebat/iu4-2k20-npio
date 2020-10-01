@@ -17,7 +17,7 @@ internal class Tests {
 
         val text = Cell("hello world", 15, 5).apply {
 //            top = false
-            bottom = false
+            bottom = true
 //            left = false
             right = false
             width = 20

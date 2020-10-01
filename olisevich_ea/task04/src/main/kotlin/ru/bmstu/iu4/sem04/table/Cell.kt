@@ -17,6 +17,9 @@ data class Cell(
     var verticalEdge = '-'
     var horizontalEdge = '|'
 
+    var verticalAlign = 1
+    var horizontalAlign = 1
+
     /**
      *      width
      *   /----------\
@@ -44,7 +47,7 @@ data class Cell(
         return collect(totalHeight) {
             val internal = when (it) {
                 0 -> if (top) horizontal else spaces
-                center -> line
+                center + verticalAlign -> line
                 totalHeight - 1 -> if (bottom) horizontal else spaces
                 else -> spaces
             }
