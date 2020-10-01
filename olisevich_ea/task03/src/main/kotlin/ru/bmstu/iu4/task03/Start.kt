@@ -1,5 +1,6 @@
 package ru.bmstu.iu4.task03
 
+import ru.bmstu.iu4.task03.desc.Person
 import ru.inforion.lab403.common.extensions.parseJson
 import java.io.File
 
@@ -19,19 +20,23 @@ object Start {
 
         println("Person's sum in 20 < age < 30: $$s");
 
-        val tab = createTable("Name Gender Age Company Balance", 13)
-        data.forEach {
-            val colsData = mutableListOf<String>()
-            colsData.add(it.name.replace(" ", "_"))
-            colsData.add(it.gender)
-            colsData.add(it.age.toString())
-            colsData.add(it.company)
-            colsData.add(it.balance)
+        val maxlen = 13
 
-            tab.rowAdd(colsData.joinToString(separator = " ") )
+        val table = table().also {
+            it.addRow(listOf("Name", "Gender", "Age", "Company", "Balance"), maxlen)
         }
 
-        val res = tab.initTable().printTable()
+        data.forEach {
+            val values = listOf(
+                    it.name.replace(" ", "_"),
+                    it.gender,
+                    it.age.toString(),
+                    it.company,
+                    it.balance)
+            table.addRow(values, maxlen)
+        }
+
+        val res = table.stringify()
 
         File("output1.txt").writeText(res)
     }
