@@ -6,6 +6,6 @@ typealias Vector = ArrayList<Float>
 object Starter {
     @JvmStatic
     fun main(args: Array<String>) {
-        println("task02")
+        println("task02 starter")
     }
 }
