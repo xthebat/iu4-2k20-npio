@@ -1,9 +1,9 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.4.10'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.72'
 }
 
-group 'ru.bmstu.iu4'
-version '1.0'
+group 'ru.bmstu.iu4.sem04'
+version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -11,18 +11,20 @@ repositories {
 
 dependencies {
     compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.4.10'
-    compile group: 'org.jetbrains.kotlin', name: 'kotlin-test-junit', version: '1.4.10'                 // Тесты
 
-    compile group: 'joda-time', name: 'joda-time', version: '2.10.6'                                    // Библа для работы с временем
+    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: '2.11.2'
 
-    compile group: 'com.github.inforion', name: 'kotlin-logging', version: '0.2.2'                      // Библа для удобного логирования
-    compile group: 'com.github.inforion', name: 'kotlin-extensions', version: '0.3.3'                   // Куча всего
-    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: '2.11.2'     // Работа с JSON
+    compile group: 'com.github.inforion', name: 'kotlin-logging', version: '0.2.2'
+
+    compile group: 'com.github.inforion', name: 'kotlin-extensions', version: '0.3.3'
+
+    testCompile group: 'org.jetbrains.kotlin', name: 'kotlin-test-junit', version: '1.4.10'
 }
 
 compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
 }
+
 compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
 }
