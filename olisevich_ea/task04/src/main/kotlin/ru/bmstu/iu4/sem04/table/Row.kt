@@ -1,5 +1,7 @@
 package ru.bmstu.iu4.sem04.table
 
+import kotlin.math.ceil
+
 data class Row(val cells: MutableList<Cell>) {
 
     constructor(vararg cells: Cell) : this(cells.toMutableList())
@@ -55,8 +57,8 @@ data class Row(val cells: MutableList<Cell>) {
     fun adjustHeight() {
         val maxHeightCell = cells.maxBy { it.text.length / it.maxChars }
         if (maxHeightCell != null){
-            val maxHeight = maxHeightCell.text.length / maxHeightCell.maxChars + 4
-            cells.map { it.apply { height = maxHeight } }
+            val maxHeight = ceil(maxHeightCell.text.length.toDouble() / maxHeightCell.maxChars) + 2
+            cells.map { it.apply { height = maxHeight.toInt() } }
         }
 
     }

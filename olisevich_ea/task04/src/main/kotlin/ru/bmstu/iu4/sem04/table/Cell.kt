@@ -58,7 +58,6 @@ data class Cell(
         if (bottom) totalHeight++
 
         val center = totalHeight / 2
-
         val verticalMinPos = when (verticalAlign) {
             "top" -> 1
             "bot" -> totalHeight - 1 - dataLines.size
