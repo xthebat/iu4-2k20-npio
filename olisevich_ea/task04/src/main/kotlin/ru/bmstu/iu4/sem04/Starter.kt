@@ -19,8 +19,13 @@ object Starter {
 
         log.info { json }
 
-        val rows = json.take(3).map { Row(it.name, it.gender, it.email, it.balance, width = 15, height = 5) }
+        val rows = json.take(10).mapIndexed { i, it -> Row(it.name, it.gender, it.email, it.balance, width = 15, maxChars = 8,
+                                                verticalAlign = "mid", horizontalAlign = "center", height = 8, rowNum = i) }
+
         val table = Table(rows.toMutableList())
+
+        table.adjustHeight()
+        table.adjustWidth()
 
         val result = table.build()
         log.info { "\n$result" }

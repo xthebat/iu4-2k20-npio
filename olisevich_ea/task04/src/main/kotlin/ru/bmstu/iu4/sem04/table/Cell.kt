@@ -1,7 +1,9 @@
 package ru.bmstu.iu4.sem04.table
 
+import ru.bmstu.iu4.sem04.static.center
 import ru.inforion.lab403.common.extensions.collect
 import ru.inforion.lab403.common.extensions.stretch
+import java.util.*
 
 data class Cell(
     var text: String,
@@ -17,8 +19,10 @@ data class Cell(
     var verticalEdge = '-'
     var horizontalEdge = '|'
 
-    var verticalAlign = 1
-    var horizontalAlign = 1
+    var horizontalAlign = "center"
+    var verticalAlign = "mid"
+
+    var maxChars = 15
 
     /**
      *      width
@@ -27,27 +31,46 @@ data class Cell(
      *  |------------|
      *  |   hello    | > height
      *  |------------|
+     *
+     *  VerticalAlign: top, bot & mid.
+     *  HorizontalAlign: center, left, right.
+     *
+     *  Maxlen: slicing string chars to lines.
      */
     fun build(): String {
         val spaces = "%${width}s".format(" ")
         val horizontal = buildString { repeat(width) { append(verticalEdge) } }
-        val line = text.stretch(width)
+
+        val dataLines = collect(text.length / maxChars+1){
+            val min = 0+(it*maxChars)
+            val max = text.length.coerceAtMost(maxChars+maxChars*it) -1
+            val line = text.slice(min..max)
+            when (horizontalAlign){
+                "center" -> line.center(width)
+                "right" -> line.stretch(width, false )
+                else -> line.stretch(width)
+            }
+        }.toCollection(LinkedList())
 
         var totalHeight = height
+
         if (top) totalHeight++
         if (bottom) totalHeight++
 
         val center = totalHeight / 2
 
-        // [0, 1, 2, 3 ... totalHeight - 1] -> ["|-------------|",  "|             |", ..... "....]
-        // it = 0 -> |-------------|
-        // it = 1 -> |             |
-        // .....
+        val verticalMinPos = when (verticalAlign) {
+            "top" -> 1
+            "bot" -> totalHeight - 1 - dataLines.size
+            else -> if (!top) center - 1 else center
+        }
+
+        val verticalMaxPos = verticalMinPos + dataLines.size
 
         return collect(totalHeight) {
             val internal = when (it) {
                 0 -> if (top) horizontal else spaces
-                center + verticalAlign -> line
+                in (verticalMinPos until verticalMaxPos) -> dataLines.pop()
                 totalHeight - 1 -> if (bottom) horizontal else spaces
                 else -> spaces
             }

@@ -1,7 +1,9 @@
 package ru.bmstu.iu4.sem04.table
 
 import org.junit.Test
+import ru.bmstu.iu4.sem04.static.center
 import ru.inforion.lab403.common.logging.logger
+import kotlin.test.assertEquals
 
 
 internal class Tests {
@@ -11,36 +13,73 @@ internal class Tests {
 
     @Test
     fun buildCellTest() {
-//        val cell = Cell("hello world", 15, 5)
-//        cell.top = false
-//        cell.bottom = false
-
         val text = Cell("hello world", 15, 5).apply {
 //            top = false
             bottom = true
 //            left = false
             right = false
             width = 20
+            verticalAlign = "top"
+            horizontalAlign = "right"
             horizontalEdge = '+'
         }.build()
 
-        log.info { "\n$text" }  // "\n" + text
+        val expected = """
+            +--------------------
+            +         hello world
+            +                    
+            +                    
+            +                    
+            +                    
+            +--------------------
+        """.trimIndent()
+        assertEquals(expected, text)
     }
 
     @Test
     fun buildRowTest() {
         val text = Row("hello world", "...", "test", width = 15, height = 5).build()
 
-        log.info { "\n$text" }  // "\n" + text
+        val expected = """
+            |---------------||---------------||---------------|
+            |               ||               ||               |
+            |               ||               ||               |
+            |  hello world  ||      ...      ||     test      |
+            |               ||               ||               |
+            |               ||               ||               |
+            |---------------||---------------||---------------|
+        """.trimIndent()
+
+        assertEquals(expected, text)
     }
 
     @Test
     fun buildTableTest() {
-        val text = Table(
-            Row("hello world", "...", "test", width = 15, height = 5),
-            Row("world", "111111", "test222", width = 15, height = 5)
-        ).build()
+        val t = Table(
+            Row("hello world", "...", "test", width = 15, height = 5, rowNum = 0),
+            Row("world", "111111", "test222", width = 15, height = 5, rowNum = 1)
+        )
 
-        log.info { "\n$text" }  // "\n" + text
+        t.adjustHeight()
+        t.adjustWidth()
+
+        val text = t.build()
+
+        val expected = """
+            |-------------|--------|---------|
+            |             |        |         |
+            |             |        |         |
+            | hello world |  ...   |  test   |
+            |             |        |         |
+            |-------------|--------|---------|
+            |             |        |         |
+            |    world    | 111111 | test222 |
+            |             |        |         |
+            |             |        |         |
+            |-------------|--------|---------|
+        """.trimIndent()
+
+        assertEquals(expected, text)
     }
+
 }
