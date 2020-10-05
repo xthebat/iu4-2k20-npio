@@ -27,27 +27,14 @@ internal class FunctionForBuildKtTest {
     }
 
     @Test
-    fun listChunkedTest() {
-        //val testList = listOf<String>("asd", "")
-        println("Output of program:")
-        println(listChunked("od tc qwewe qwe w",5))
-    }
-
-    @Test
     fun maxWidthTest() {
-        //fun maxWidth(vararg strings: String, width: Int)
         val res = maxWidth("odineddddd", "dva", "tri3d", width = 2)
         assertEquals(10, res)
     }
 
     @Test
     fun maxHeightTest() {
-        //val file = "C:/Users/Nikita/Documents/11SemestrJopa/Gladkih/repository/iu4-2k20-npio/files/task03/generated.json".toFile()
-        ///val text = file.readText()
-        //val json = text.parseJson<List<Person>>()
         val r = maxHeight("ten10ten10", "eleven11111", width = 10)
-        //val i = maxHeight(json.take(3)[0].name, json.take(3)[0].gender, json.take(3)[0].balance, json.take(3)[0].email, width = 2)
-        //println(i)
         println(r)
         assertEquals(2, r)
     }

@@ -29,7 +29,7 @@ data class Cell(
         val spaces = "%${width}s".format(" ")
         val horizontal = buildString { repeat(width) { append(verticalEdge) } }
 
-        val newLine = listChunked(text, width)
+        val newLine = text.chunked(width)
 
         var totalHeight = height
         if (top) totalHeight++
@@ -37,29 +37,11 @@ data class Cell(
         if (totalHeight<3) totalHeight = 3
 
         if (clearOtherInTable) {
-            if (tableHorizontal == 1) {
-                left = true
-                right = true
-                top = true
-                bottom = true
-            }
-            if (tableHorizontal == 2) {
-                left = false
-                right = true
-                top = true
-                bottom = true
-            }
-            if (tableHorizontal == 3) {
-                left = true
-                right = true
-                top = false
-                bottom = true
-            }
-            if (tableHorizontal == 4) {
-                left = false
-                right = true
-                top = false
-                bottom = true
+            when (tableHorizontal) {
+                1 -> {left = true; right = true; top = true; bottom = true}
+                2 -> {left = false; right = true; top = true; bottom = true}
+                3 -> {left = true; right = true; top = false; bottom = true}
+                4 -> {left = false; right = true; top = false; bottom = true}
             }
         }
 
