@@ -45,7 +45,6 @@ data class Cell(
      *  |------------|
      */
     fun build(): String {
-//        val spaces = "%${width}s".format(" ")
         val horizontal = buildString { repeat(width) { append(verticalEdge) } }
 
         val textIntoCell = mutableListOf<String>()

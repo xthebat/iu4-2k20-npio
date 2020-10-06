@@ -6,8 +6,6 @@ data class Row(val cells: MutableList<Cell>) {
     var rowTop = false
     var doubleFrames = false
 
-    /* constructor(vararg cells: Cell) : this(cells.toMutableList()) */
-
     constructor(vararg texts: String, width: Int, height: Int) :
             this(texts.map { Cell(it, width, height) }.toMutableList())
 
