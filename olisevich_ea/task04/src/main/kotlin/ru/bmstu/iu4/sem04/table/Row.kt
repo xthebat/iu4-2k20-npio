@@ -52,13 +52,10 @@ data class Row(val cells: MutableList<Cell>) {
                     }
                 }
 
-            }.map {
-                // apply нужен, т.к. он возвращает сам объект, чтобы присвоить его i'ому элементу
-                it.apply {
-                    it.horizontalAlign = horizontalAlign
-                    it.verticalAlign = verticalAlign
-                    it.maxChars = maxChars
-                }
+            }.onEach {
+                it.horizontalAlign = horizontalAlign
+                it.verticalAlign = verticalAlign
+                it.maxChars = maxChars
             }.toMutableList())
 
 

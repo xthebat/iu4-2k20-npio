@@ -8,6 +8,7 @@ import ru.bmstu.iu4.sem04.desc.AlignTypes.Right
 import ru.bmstu.iu4.sem04.static.center
 import ru.inforion.lab403.common.extensions.collect
 import ru.inforion.lab403.common.extensions.stretch
+import ru.inforion.lab403.common.extensions.times
 import java.util.*
 
 data class Cell(
@@ -43,10 +44,10 @@ data class Cell(
      *  Maxlen: slicing string chars to lines.
      */
     fun build(): String {
-        val spaces = "%${width}s".format(" ")
+        val spaces = " " * width
         val horizontal = buildString { repeat(width) { append(verticalEdge) } }
 
-        val dataLines = collect(text.length / maxChars + 1) {
+        val dataLines = MutableList(text.length / maxChars + 1) {
             val min = 0 + (it * maxChars)
             val max = text.length.coerceAtMost(maxChars + maxChars * it) - 1
             val line = text.slice(min..max)
