@@ -1,6 +1,8 @@
 package ru.bmstu.iu4.sem04.table
 
 import org.junit.Test
+import ru.bmstu.iu4.sem04.desc.AlignTypes.Top
+import ru.bmstu.iu4.sem04.desc.AlignTypes.Right
 import ru.bmstu.iu4.sem04.static.center
 import ru.inforion.lab403.common.logging.logger
 import kotlin.test.assertEquals
@@ -19,8 +21,8 @@ internal class Tests {
 //            left = false
             right = false
             width = 20
-            verticalAlign = "top"
-            horizontalAlign = "right"
+            verticalAlign = Top
+            horizontalAlign = Right
             horizontalEdge = '+'
         }.build()
 
@@ -59,7 +61,7 @@ internal class Tests {
             Row("hello world", "...", "test", width = 15, height = 5, rowNum = 0),
             Row("world", "111111", "test222", width = 15, height = 5, rowNum = 1)
         )
-
+        
         t.adjustHeight()
         t.adjustWidth()
 

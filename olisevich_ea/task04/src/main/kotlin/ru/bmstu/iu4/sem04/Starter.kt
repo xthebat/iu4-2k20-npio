@@ -2,6 +2,7 @@ package ru.bmstu.iu4.sem04
 
 import ru.bmstu.iu4.sem04.desc.Person
 import ru.bmstu.iu4.sem04.table.Cell
+import ru.bmstu.iu4.sem04.desc.AlignTypes.Mid
 import ru.bmstu.iu4.sem04.table.Row
 import ru.bmstu.iu4.sem04.table.Table
 import ru.inforion.lab403.common.extensions.parseJson
@@ -19,8 +20,10 @@ object Starter {
 
         log.info { json }
 
-        val rows = json.take(10).mapIndexed { i, it -> Row(it.name, it.gender, it.email, it.balance, width = 15, maxChars = 10,
-                                                verticalAlign = "mid", horizontalAlign = "center", height = 8, rowNum = i) }
+        val rows = json.take(10).mapIndexed { i, it ->
+            Row(it.name, it.gender, it.email, it.balance, width = 15, maxChars = 10,
+                    verticalAlign = Mid, horizontalAlign = Mid, height = 8, rowNum = i)
+        }
 
         val table = Table(rows.toMutableList())
 

@@ -36,7 +36,7 @@ data class Cell(
         val center = height / 2
 
         return collect(height) {
-            var internal = when (it) {
+            val internal = when (it) {
                 0 -> if (top) horizontal else spaces
                 center -> line
                 height - 1 -> if (bot) horizontal else spaces

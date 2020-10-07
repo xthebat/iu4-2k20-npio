@@ -1,15 +1,20 @@
 package ru.bmstu.iu4.sem04.table
 
+import ru.bmstu.iu4.sem04.desc.AlignTypes.Mid
+import ru.bmstu.iu4.sem04.desc.AlignTypes.Top
+import ru.bmstu.iu4.sem04.desc.AlignTypes.Bot
+import ru.bmstu.iu4.sem04.desc.AlignTypes.Left
+import ru.bmstu.iu4.sem04.desc.AlignTypes.Right
 import ru.bmstu.iu4.sem04.static.center
 import ru.inforion.lab403.common.extensions.collect
 import ru.inforion.lab403.common.extensions.stretch
 import java.util.*
 
 data class Cell(
-    var text: String,
+        var text: String,
 
-    var width: Int,
-    var height: Int,
+        var width: Int,
+        var height: Int,
 ) {
     var left = true
     var right = true
@@ -19,8 +24,8 @@ data class Cell(
     var verticalEdge = '-'
     var horizontalEdge = '|'
 
-    var horizontalAlign = "center"
-    var verticalAlign = "mid"
+    var horizontalAlign = Mid
+    var verticalAlign = Mid
 
     var maxChars = 15
 
@@ -41,13 +46,13 @@ data class Cell(
         val spaces = "%${width}s".format(" ")
         val horizontal = buildString { repeat(width) { append(verticalEdge) } }
 
-        val dataLines = collect(text.length / maxChars+1){
-            val min = 0+(it*maxChars)
-            val max = text.length.coerceAtMost(maxChars+maxChars*it) -1
+        val dataLines = collect(text.length / maxChars + 1) {
+            val min = 0 + (it * maxChars)
+            val max = text.length.coerceAtMost(maxChars + maxChars * it) - 1
             val line = text.slice(min..max)
-            when (horizontalAlign){
-                "center" -> line.center(width)
-                "right" -> line.stretch(width, false )
+            when (horizontalAlign) {
+                Mid -> line.center(width)
+                Right -> line.stretch(width, false)
                 else -> line.stretch(width)
             }
         }.toCollection(LinkedList())
@@ -59,8 +64,8 @@ data class Cell(
 
         val center = totalHeight / 2
         val verticalMinPos = when (verticalAlign) {
-            "top" -> 1
-            "bot" -> totalHeight - 1 - dataLines.size
+            Top -> 1
+            Bot -> totalHeight - 1 - dataLines.size
             else -> if (!top) center - 1 else center
         }
 
