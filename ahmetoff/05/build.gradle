@@ -18,7 +18,9 @@ dependencies {
 
     compile group: 'com.github.inforion', name: 'kotlin-extensions', version: '0.3.3'
 
-    testCompile group: 'org.jetbrains.kotlin', name: 'kotlin-test-junit', version: '1.4.10'
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-test', version: '1.4.10'
+
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-test-junit', version: '1.4.10'
 }
 
 compileKotlin {
