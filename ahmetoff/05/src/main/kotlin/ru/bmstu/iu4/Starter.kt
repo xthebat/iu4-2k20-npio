@@ -5,21 +5,27 @@ import ru.bmstu.iu4.common.Canvas
 import ru.bmstu.iu4.common.plot
 import ru.bmstu.iu4.common.write
 import ru.bmstu.iu4.impl.*
+import java.io.Writer
 
 object Starter {
     @JvmStatic
     fun main(args: Array<String>) {
-        val rectangle = Rectangle(Point(10.0, 20.0), Point(20.0, 30.0), 0)
-        val circle = Circle(Point(10.0, 20.0), 7.0, 1)
 
-        // val list = listOf<AbstractFigure>(rectangle, circle).forEach {
-        //    println(it.stringify())
-        //    println(it.area())
-        //}
+        val point = Point(1.0, 1.0).apply {
+            sym = '~'
+        }
+        val rectangle = Rectangle(Point(4.0, 3.0), Point(12.0, 6.0), 0).apply {
+            border = '$'
+        }
 
-        val list = listOf(rectangle, circle, Point(10.0, 20.0))
-        val plot = Canvas(15, 15, 2).draw(list)
+        val circle = Circle(Point(10.0, 10.0), 5.0, 1).apply {
+            border = '|'
+        }
 
-        plot.write(System.out.writer())
+        val list = listOf(rectangle, circle, point)
+
+        val plot = Canvas(20, 20, 2).draw(list)
+
+        plot.write()
     }
 }

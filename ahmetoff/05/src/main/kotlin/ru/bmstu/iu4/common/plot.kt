@@ -10,7 +10,6 @@ fun plot(width: Int, height: Int, init: Char = ' ') = Array(width) {
     }
 }
 
-fun Plot.write(writer: Writer) = forEach {
-    writer.write(it)
-    writer.appendLine()
+fun Plot.write() = forEach {
+    println(it)
 }
