@@ -13,8 +13,12 @@ object Starter {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        val rectangle = Rectangle(Point(10.0, 20.0), Point(20.0, 30.0), 0)
-        val circle = Circle(Point(10.0, 20.0), 10.0, 1)
+
+        val canvasWidth = 40
+        val canvasHeigth = 25
+
+        val rectangle = Rectangle(Point(0.0, 0.0), Point(canvasWidth.toDouble() - 1, canvasHeigth.toDouble() - 1), 0)
+        val circle = Circle(Point(10.0, 20.0), 2.0, 1)
 
         val figures = listOf(rectangle, circle).onEach {
             log.warning { "stringify($it) -> ${it.stringify()} area = ${it.area()}" }
@@ -30,8 +34,8 @@ object Starter {
 
         log.info { "total area = ${totalArea(figures)}" }
 
-        val list = listOf(rectangle, circle, Point(10.0, 20.0))
-        val plot = Canvas(100, 200, 10).draw(list)
+        val list = listOf(Point(20.0, 10.0), Line(Point(10.0, 10.0), Point(10.0, 15.0)), rectangle, circle)
+        val plot = Canvas(canvasWidth, canvasHeigth, 2).draw(list)
 
         plot.write(System.out.writer())
     }

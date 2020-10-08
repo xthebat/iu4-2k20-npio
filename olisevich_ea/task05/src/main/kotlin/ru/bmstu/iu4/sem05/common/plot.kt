@@ -7,6 +7,7 @@ typealias Plot = Array<CharArray>
 fun plot(width: Int, height: Int, init: Char = ' ') = Array(width) { CharArray(height) { init } }
 
 fun Plot.write(writer: Writer) = forEach {
-    writer.write(it)
-    writer.appendLine()
+    //writer.write(it)
+    //writer.append('\n') не работает при размере Canvas < 100x100
+    println(it)
 }
