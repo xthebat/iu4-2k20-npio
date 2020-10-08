@@ -35,7 +35,7 @@ object Starter {
         log.info { "total area = ${totalArea(figures)}" }
 
         val list = listOf(Point(20.0, 10.0), Line(Point(10.0, 10.0), Point(10.0, 15.0)), rectangle, circle)
-        val plot = Canvas(canvasWidth, canvasHeigth, 2).draw(list)
+        val plot = Canvas(canvasWidth, canvasHeigth, 1).draw(list)
 
         plot.write(System.out.writer())
     }

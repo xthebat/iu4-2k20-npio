@@ -15,7 +15,6 @@ class Canvas(val width: Int, val height: Int, val resolution: Int) {
      * ***************************************************************************************************************
      *
      */
-    // TODO: use resolution
     fun draw(elements: Collection<Drawable>) =
         plot(height * resolution, width * resolution).also { elements.forEach { e -> e.draw(it, resolution) } }
 }
