@@ -9,12 +9,19 @@ class Rectangle(val lb: Point, val rt: Point, tag: Int): AbstractFigure(tag) {
     val width get() = rt.x - lb.x
     val height get() = rt.y - lb.y
 
-    override fun area() = width * height
+    override fun area(): Int = width * height
 
     override fun stringify() = "Rectangle(tag=$tag)"
 
     override fun draw(plot: Plot) {
-        TODO("Not yet implemented")
+        val rectangleLines = listOf(
+            Line(rt, Point(rt.x, lb.y)),
+            Line(lb, Point(rt.x, lb.y)),
+            Line(Point(lb.x, rt.y), rt),
+            Line(Point(lb.x, rt.y), lb)
+        )
+
+        rectangleLines.forEach { it.draw(plot) }
     }
 
     override fun print(writer: Writer) {
@@ -23,8 +30,6 @@ class Rectangle(val lb: Point, val rt: Point, tag: Int): AbstractFigure(tag) {
 
     init {
         require(lb.x < rt.x)
-        require(lb.y < rt.y)
-
-        println("Create: tag = $tag")
+        require(lb.y > rt.y)
     }
 }
