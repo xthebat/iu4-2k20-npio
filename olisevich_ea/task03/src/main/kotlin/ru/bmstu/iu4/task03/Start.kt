@@ -12,14 +12,6 @@ object Start {
 
         val data = File("generated.json").readText().parseJson<List<Person>>()
 
-        val s = data.filter { it.age in 21..29 }.map {
-            it.balance
-                .replace("$", "")
-                .replace(",", "").toFloat()
-        }.sum()
-
-        println("Person's sum in 20 < age < 30: $$s");
-
         val maxlen = 13
 
         val table = table().also {
@@ -38,7 +30,7 @@ object Start {
 
         val res = table.stringify()
 
-        File("output1.txt").writeText(res)
+
     }
 
 }
