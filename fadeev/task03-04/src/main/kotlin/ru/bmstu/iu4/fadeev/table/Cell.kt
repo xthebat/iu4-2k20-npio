@@ -5,17 +5,17 @@ import ru.inforion.lab403.common.extensions.collect
 import ru.inforion.lab403.common.extensions.stretch
 
 data class Cell(
-        var text: String,
-        var width: Int,
-        var height: Int,
+    var text: String,
+    var width: Int,
+    var height: Int,
 
-        var rPos: Int,
-        var cntRow: Int,
-        var maxDataLength: Int,
-        var cntChar: Int,
-        var adjH: Boolean,
-        var adjW: Boolean,
-        var doubleBrdOff: Boolean
+    var rPos: Int,
+    var cntRow: Int,
+    var maxDataLength: Int,
+    var cntChar: Int,
+    var adjH: Boolean,
+    var adjW: Boolean,
+    var doubleBrdOff: Boolean
 ) {
     var left = true
     var right = true
@@ -60,7 +60,7 @@ data class Cell(
 
         if (top) totalHeight++
         if (bottom) totalHeight++
-        if (rPos == cntRow && cntChar >= maxDataLength) totalHeight++
+        if (rPos == cntRow && cntChar > maxDataLength) totalHeight++
         if (totalHeight < 3) totalHeight = 3
 
         return collect(totalHeight) {
