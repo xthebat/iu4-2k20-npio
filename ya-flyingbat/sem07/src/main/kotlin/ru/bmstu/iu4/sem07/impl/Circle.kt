@@ -8,6 +8,9 @@ import kotlin.math.round
 import kotlin.math.sin
 
 class Circle(val center: Point, val radius: Int, tag: Int = 0) : AbstractFigure(tag) {
+
+    constructor(x: Int, y: Int, radius: Int, tag: Int = 0) : this(Point(x, y), radius, tag)
+
     override fun stringify() = "Circle(tag=$tag)"
 
     override fun area(): Int = (Math.PI * radius * radius).toInt()

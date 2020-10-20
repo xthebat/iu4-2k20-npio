@@ -27,7 +27,7 @@ class Canvas(val width: Int, val height: Int, val resolution: Int) {
                 elements.forEach {
                     element -> element
                         .runCatching { draw(it) }
-                        .onFailure { error -> log.severe { "Can't draw [$element] -> $error" } }
+                        .onFailure { error -> log.severe { "Can't draw ${element::class.simpleName} [$element] -> $error" } }
                 }
             }
 }

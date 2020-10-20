@@ -19,7 +19,6 @@ class Line(val src: Point, val dst: Point) : Drawable {
                 List(length) { Point(src.x, start + it) }
             }
             else -> {
-                println("$this")
                 val start = minOf(src.x, dst.x)
                 val dx = dst.x - src.x
                 val dy = dst.y - src.y
