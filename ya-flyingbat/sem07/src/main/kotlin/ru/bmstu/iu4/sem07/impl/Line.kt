@@ -1,7 +1,7 @@
-package ru.bmstu.iu4.sem05.impl
+package ru.bmstu.iu4.sem07.impl
 
-import ru.bmstu.iu4.sem05.common.Plot
-import ru.bmstu.iu4.sem05.interfaces.Drawable
+import ru.bmstu.iu4.sem07.common.Plot
+import ru.bmstu.iu4.sem07.interfaces.Drawable
 import kotlin.math.abs
 
 class Line(val src: Point, val dst: Point) : Drawable {

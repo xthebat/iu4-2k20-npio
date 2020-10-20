@@ -1,9 +1,9 @@
-package ru.bmstu.iu4.sem05
+package ru.bmstu.iu4.sem07
 
-import ru.bmstu.iu4.sem05.common.Canvas
-import ru.bmstu.iu4.sem05.common.print
-import ru.bmstu.iu4.sem05.common.write
-import ru.bmstu.iu4.sem05.impl.*
+import ru.bmstu.iu4.sem07.common.Canvas
+import ru.bmstu.iu4.sem07.common.print
+import ru.bmstu.iu4.sem07.common.write
+import ru.bmstu.iu4.sem07.impl.*
 import java.io.File
 
 object Starter {

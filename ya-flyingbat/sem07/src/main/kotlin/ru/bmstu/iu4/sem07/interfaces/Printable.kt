@@ -1,4 +1,4 @@
-package ru.bmstu.iu4.sem05.interfaces
+package ru.bmstu.iu4.sem07.interfaces
 
 import java.io.Writer
 

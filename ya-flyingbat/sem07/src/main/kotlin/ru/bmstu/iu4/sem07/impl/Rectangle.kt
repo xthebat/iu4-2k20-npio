@@ -1,7 +1,7 @@
-package ru.bmstu.iu4.sem05.impl
+package ru.bmstu.iu4.sem07.impl
 
-import ru.bmstu.iu4.sem05.abstracts.AbstractFigure
-import ru.bmstu.iu4.sem05.common.Plot
+import ru.bmstu.iu4.sem07.abstracts.AbstractFigure
+import ru.bmstu.iu4.sem07.common.Plot
 import java.io.Writer
 
 class Rectangle(val lb: Point, val rt: Point, tag: Int = 0): AbstractFigure(tag) {

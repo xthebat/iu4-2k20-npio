@@ -1,4 +1,4 @@
-package ru.bmstu.iu4.sem05.common
+package ru.bmstu.iu4.sem07.common
 
 import ru.inforion.lab403.common.logging.logger
 import java.io.OutputStream

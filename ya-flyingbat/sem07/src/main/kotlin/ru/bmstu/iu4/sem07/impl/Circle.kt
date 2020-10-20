@@ -1,8 +1,7 @@
-package ru.bmstu.iu4.sem05.impl
+package ru.bmstu.iu4.sem07.impl
 
-import ru.bmstu.iu4.sem05.abstracts.AbstractFigure
-import ru.bmstu.iu4.sem05.common.Plot
-import ru.inforion.lab403.common.extensions.collect
+import ru.bmstu.iu4.sem07.abstracts.AbstractFigure
+import ru.bmstu.iu4.sem07.common.Plot
 import java.io.Writer
 import kotlin.math.cos
 import kotlin.math.round

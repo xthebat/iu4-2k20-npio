@@ -1,7 +1,7 @@
-package ru.bmstu.iu4.sem05.common
+package ru.bmstu.iu4.sem07.common
 
-import ru.bmstu.iu4.sem05.impl.Rectangle
-import ru.bmstu.iu4.sem05.interfaces.Drawable
+import ru.bmstu.iu4.sem07.impl.Rectangle
+import ru.bmstu.iu4.sem07.interfaces.Drawable
 import ru.inforion.lab403.common.logging.logger
 
 class Canvas(val width: Int, val height: Int, val resolution: Int) {
