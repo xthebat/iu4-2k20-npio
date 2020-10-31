@@ -5,11 +5,16 @@ import java.io.Writer
 
 typealias Plot = Array<CharArray>
 
+// TODO: convert to class
+// http://gameprogrammingpatterns.com/component.html
+
 fun plot(width: Int, height: Int, init: Char = ' ') = Array(height) { CharArray(width) { init } }
 
 val Plot.width get() = first().size
 
 val Plot.height get() = size
+
+fun Plot.marker(x: Int, y: Int) = this[height - y - 1][x]
 
 fun Plot.draw(x: Int, y: Int, marker: Char) {
     this[height - y - 1][x] = marker
