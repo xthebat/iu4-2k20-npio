@@ -2,6 +2,7 @@ package ru.bmstu.iu4.sem07.impl
 
 import ru.bmstu.iu4.sem07.abstracts.Entity
 import ru.bmstu.iu4.sem07.interfaces.Drawable
+import ru.bmstu.iu4.sem07.interfaces.Printable
 import kotlin.math.abs
 
 // http://gameprogrammingpatterns.com/component.html
@@ -36,7 +37,10 @@ class Line(val src: Point, val dst: Point) : Entity() {
         dst.drawer.draw(plot)
     }
 
+    internal val writer = Printable { writer -> writer.write("Line$src -> $dst\n") }
+
     init {
         addComponent(drawer)
+        addComponent(writer)
     }
 }

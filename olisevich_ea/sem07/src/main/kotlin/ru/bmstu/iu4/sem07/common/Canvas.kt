@@ -1,7 +1,6 @@
 package ru.bmstu.iu4.sem07.common
 
 import ru.bmstu.iu4.sem07.abstracts.Entity
-import ru.bmstu.iu4.sem07.impl.Rectangle
 import ru.bmstu.iu4.sem07.interfaces.Drawable
 import ru.inforion.lab403.common.logging.logger
 
@@ -29,7 +28,7 @@ class Canvas(val width: Int, val height: Int, val resolution: Int) {
             elements
                 .forEach { element ->
                     element[Drawable::class]
-                        ?.runCatching { draw(it) }
+                        ?.runCatching { draw(it)}
                         ?.onFailure { error -> log.severe { "Can't draw ${element::class.simpleName} [$element] -> $error" } }
                 }
         }
