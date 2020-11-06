@@ -23,6 +23,10 @@ dependencies {
     implementation group: 'org.pcap4j', name: 'pcap4j', version: '1.8.2', ext: 'pom'
     implementation group: 'org.pcap4j', name: 'pcap4j-core', version: '1.8.2'
     implementation group: 'org.pcap4j', name: 'pcap4j-packetfactory-static', version: '1.8.2'
+
+    compile group: 'org.daisy.libs', name: 'commons-httpclient', version: '3.1.0'
+//Thanks for using https://jar-download.com
+
 }
 
 compileKotlin {
