@@ -1,0 +1,32 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.10'
+}
+
+group 'ru.bmstu.iu4.sem10'
+version '1.0'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+
+dependencies {
+    implementation group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib'
+
+    implementation group: 'com.github.inforion', name: 'kotlin-logging', version: '0.2.3'
+    implementation group: 'com.github.inforion', name: 'kotlin-extensions', version: '0.3.3'
+
+    implementation group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: '2.11.3'
+
+    implementation group: 'org.pcap4j', name: 'pcap4j', version: '1.8.2', ext: 'pom'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "11"
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "11"
+}
