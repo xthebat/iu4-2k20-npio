@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Created by .ignore support plugin (hsz.mobi)
 ### Example user template template
 ### Example user template
@@ -9,4 +10,17 @@ out
 gen
 .gradle
 build
+=======
+# Created by .ignore support plugin (hsz.mobi)
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+.gradle
+build
+>>>>>>> master
 gradle

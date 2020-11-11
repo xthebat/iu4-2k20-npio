@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.4.10'
 }
@@ -26,3 +27,33 @@ dependencies {
 compileKotlin {
     kotlinOptions.jvmTarget = "11"
 }
+=======
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.10'
+}
+
+group 'ru.bmstu.iu4'
+version '1.0'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    compile group: 'com.github.inforion', name: 'kotlin-extensions', version: '0.3.3'
+    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: '2.11.2'
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib'
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-test'
+
+    testCompile group: 'org.jetbrains.kotlin', name: 'kotlin-test-junit'
+    testCompile group: 'junit', name: 'junit'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation 'com.github.inforion:kotlin-logging:v0.2.1'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "11"
+}
+>>>>>>> master
