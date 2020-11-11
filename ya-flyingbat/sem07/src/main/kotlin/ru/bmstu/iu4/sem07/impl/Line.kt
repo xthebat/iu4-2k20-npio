@@ -1,12 +1,17 @@
 package ru.bmstu.iu4.sem07.impl
 
-import ru.bmstu.iu4.sem07.common.Plot
+import ru.bmstu.iu4.sem07.abstracts.Entity
 import ru.bmstu.iu4.sem07.interfaces.Drawable
 import kotlin.math.abs
 
-class Line(val src: Point, val dst: Point) : Drawable {
+// http://gameprogrammingpatterns.com/component.html
+class Line(val src: Point, val dst: Point) : Entity() {
 
-    override fun draw(plot: Plot) {
+    override fun toString() = "$src -> $dst"
+
+    // https://en.wikipedia.org/wiki/Bridge_pattern
+    // https://www.dofactory.com/net/bridge-design-pattern
+    internal val drawer = Drawable { plot ->
         when {
             dst.y == src.y -> {
                 val start = minOf(src.x, dst.x)
@@ -26,10 +31,12 @@ class Line(val src: Point, val dst: Point) : Drawable {
                 val slope = dy / dx  // may be only +/- 1
                 List(abs(dx)) { Point(start + it, it * slope + src.y) }
             }
-        }.forEach { it.draw(plot) }
-        src.draw(plot)
-        dst.draw(plot)
+        }.forEach { it.drawer.draw(plot) }
+        src.drawer.draw(plot)
+        dst.drawer.draw(plot)
     }
 
-    override fun toString() = "$src -> $dst"
+    init {
+        addComponent(drawer)
+    }
 }
