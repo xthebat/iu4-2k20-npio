@@ -9,6 +9,7 @@ import ru.inforion.lab403.common.logging.FINEST
 import ru.inforion.lab403.common.logging.logger
 import org.apache.commons.httpclient.HttpParser
 import org.pcap4j.packet.IpPacket
+import ru.inforion.lab403.common.extensions.hexlify
 import java.nio.charset.Charset
 
 object Application {
@@ -22,7 +23,7 @@ object Application {
         return names.any { it in permittedNames }
     }
 
-    fun processHttpRequest(bytes: ByteArray) {
+    fun processHttpRequest(index: Int, bytes: ByteArray) = runCatching {
         val text = bytes.toString(Charsets.US_ASCII)
 
         val tokens = text.split("\r\n")
@@ -52,9 +53,11 @@ object Application {
                 log.config { "POST -> $text" }
             }
         }
-    }
+    }.onFailure {
+        log.severe { "Can't parse HTTP-REQUEST packet #$index due to $it\nbytes: ${bytes.hexlify(false)}" }
+    }.isSuccess
 
-    fun processHttpResponse(bytes: ByteArray) {
+    fun processHttpResponse(index: Int, bytes: ByteArray) = runCatching {
         val text = bytes.toString(Charsets.US_ASCII)
 
 //        log.finer { text }
@@ -70,27 +73,33 @@ object Application {
                 name to value.trim()
             }
 
-        log.finer { text }
+//        log.finer { text }
         log.config { headers }
-    }
+    }.onFailure {
+        log.severe { "Can't parse HTTP-RESPONSE packet #$index due to $it\nbytes: ${bytes.hexlify(false)}" }
+    }.isSuccess
 
-    fun processTcp(packet: Packet, tcp: TcpPacket) {
-        if (!tcp.header.psh) return
+    val defragmentor = Defragmentor()
 
-        if (tcp.header.dstPort.valueAsInt() == 80) {
-            processHttpRequest(tcp.payload.rawData)
-            return
-        }
+    fun processTcp(index: Int, packet: Packet, tcp: TcpPacket) {
+        defragmentor.addFragment(index, packet)?.let { reassembled ->
+            if (!tcp.header.psh) return
 
-        if (tcp.header.srcPort.valueAsInt() == 80) {
-            processHttpResponse(tcp.payload.rawData)
-            return
+            if (tcp.header.dstPort.valueAsInt() == 80) {
+                processHttpRequest(index, reassembled)
+                return
+            }
+
+            if (tcp.header.srcPort.valueAsInt() == 80) {
+                processHttpResponse(index, reassembled)
+                return
+            }
         }
     }
 
     private var processing = true
 
-    fun processPacket(packet: Packet) {
+    fun processPacket(index: Int, packet: Packet) {
 //        log.finest { packet }
 
         val dns = packet[DnsPacket::class.java]
@@ -99,7 +108,7 @@ object Application {
 //            processing = processDns(packet, dns)
         } else if (processing) {
             val tcp = packet[TcpPacket::class.java] ?: return
-            processTcp(packet, tcp)
+            processTcp(index, packet, tcp)
         }
     }
 
@@ -109,11 +118,16 @@ object Application {
 
         val handle = Pcaps.openOffline("temp/test.pcapng")
 
-        handle.loop(-1) { packet: Packet ->
-            runCatching { processPacket(packet) }
-                .onFailure {
-                    log.severe { it.stackTraceToString() }
-                }
+        var index = 1
+
+        handle.loop(180) { packet: Packet ->
+            runCatching {
+                processPacket(index, packet)
+            }.onFailure {
+                log.severe { it.stackTraceToString() }
+            }
+
+            index++
         }
     }
 }
