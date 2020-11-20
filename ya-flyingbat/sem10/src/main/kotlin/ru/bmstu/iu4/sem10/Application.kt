@@ -1,27 +1,19 @@
 package ru.bmstu.iu4.sem10
 
-import org.pcap4j.core.PcapHandle
 import org.pcap4j.core.Pcaps
 import org.pcap4j.packet.DnsPacket
 import org.pcap4j.packet.Packet
 import org.pcap4j.packet.TcpPacket
 import ru.inforion.lab403.common.logging.FINEST
 import ru.inforion.lab403.common.logging.logger
-import org.apache.commons.httpclient.HttpParser
-import org.pcap4j.packet.IpPacket
 import ru.inforion.lab403.common.extensions.hexlify
-import java.nio.charset.Charset
+import java.net.InetSocketAddress
+import kotlin.concurrent.thread
 
 object Application {
     val log = logger(FINEST)
 
     val permittedNames = listOf("e-m-b.org")
-
-    fun processDns(packet: Packet, dns: DnsPacket): Boolean {
-        val names = dns.header.questions.map { it.qName.name }.toSet()
-        log.fine { names }
-        return names.any { it in permittedNames }
-    }
 
     fun processHttpRequest(index: Int, bytes: ByteArray) = runCatching {
         val text = bytes.toString(Charsets.US_ASCII)
@@ -79,38 +71,21 @@ object Application {
         log.severe { "Can't parse HTTP-RESPONSE packet #$index due to $it\nbytes: ${bytes.hexlify(false)}" }
     }.isSuccess
 
-    val defragmentor = Defragmentor()
+    private val requiredAddress = InetSocketAddress("10.211.55.3", 54605)
 
-    fun processTcp(index: Int, packet: Packet, tcp: TcpPacket) {
-        defragmentor.addFragment(index, packet)?.let { reassembled ->
-            if (!tcp.header.psh) return
-
-            if (tcp.header.dstPort.valueAsInt() == 80) {
-                processHttpRequest(index, reassembled)
-                return
-            }
-
-            if (tcp.header.srcPort.valueAsInt() == 80) {
-                processHttpResponse(index, reassembled)
-                return
+    private val tcpTrafficParser = TCPTrafficParser()
+        .notifyNewSocket {
+            if (it.dstAddr == requiredAddress) {
+                log.severe { "Handling started ${InetSocketAddress("10.211.55.3", 54605)}" }
+                val stream = it.inputSteam
+                thread {
+                    while (true) {
+                        val bytes = stream.readNBytes(4096)
+                        log.severe { bytes.hexlify() }
+                    }
+                }
             }
         }
-    }
-
-    private var processing = true
-
-    fun processPacket(index: Int, packet: Packet) {
-//        log.finest { packet }
-
-        val dns = packet[DnsPacket::class.java]
-
-        if (dns != null) {
-//            processing = processDns(packet, dns)
-        } else if (processing) {
-            val tcp = packet[TcpPacket::class.java] ?: return
-            processTcp(index, packet, tcp)
-        }
-    }
 
     @JvmStatic
     fun main(args: Array<String>) {
@@ -122,7 +97,8 @@ object Application {
 
         handle.loop(180) { packet: Packet ->
             runCatching {
-                processPacket(index, packet)
+                tcpTrafficParser.processPacket(index, packet)
+                Thread.sleep(20)
             }.onFailure {
                 log.severe { it.stackTraceToString() }
             }
