@@ -16,7 +16,7 @@ class TCPTrafficParser {
 
     private var newSocketNotifier: TcpSocketHandler? = null
 
-    private val called = mutableSetOf<Long>()
+    private val acknowledges = mutableSetOf<Long>()
 
     fun notifyNewSocket(handler: TcpSocketHandler) = apply { newSocketNotifier = handler }
     
@@ -41,25 +41,25 @@ class TCPTrafficParser {
 
         if (socket != null) {
             if (tcp.header.fin || tcp.header.rst) {
-                log.warning { "Close connection seq=$seq index=$index ack=$ack socket=$socket " }
+                log.finest { "Close connection seq=$seq index=$index ack=$ack socket=$socket " }
                 socket.close()
                 sockets.remove(ack)
-                called.remove(ack)
+                acknowledges.remove(ack)
                 return true
             }
 
             if (tcp.header.psh) {
-                log.finer { "Fragment for seq=$seq index=$index ack=$ack socket=$socket size=${tcp.payload.rawData.size}" }
-                socket.write(tcp)
+                log.trace { "Fragment for seq=$seq index=$index ack=$ack socket=$socket size=${tcp.payload.rawData.size}" }
+                socket.outputStream.write(tcp.payload.rawData)
                 return true
             }
         } else if (tcp.header.psh) {
             sockets[ack] = TCPSocket(ack, srcAddr, dstAddr).also {
-                log.fine { "Add new socket for seq=$seq index=$index ack=$ack socket=$it" }
-                if (ack !in called) {
-                    called.add(ack)
-                    newSocketNotifier?.invoke(it)
-                }
+                log.finest { "Add new socket for seq=$seq index=$index ack=$ack socket=$it" }
+                check(ack !in acknowledges) { "TCPSocket with $ack already connected!" }
+                it.outputStream.write(tcp.payload.rawData)
+                acknowledges.add(ack)
+                newSocketNotifier?.invoke(it)
             }
             return true
         }

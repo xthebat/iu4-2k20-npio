@@ -1,89 +1,73 @@
 package ru.bmstu.iu4.sem10
 
 import org.pcap4j.core.Pcaps
-import org.pcap4j.packet.DnsPacket
 import org.pcap4j.packet.Packet
-import org.pcap4j.packet.TcpPacket
+import ru.inforion.lab403.common.extensions.hexAsUInt
 import ru.inforion.lab403.common.logging.FINEST
 import ru.inforion.lab403.common.logging.logger
-import ru.inforion.lab403.common.extensions.hexlify
-import java.net.InetSocketAddress
+import java.io.InputStream
+import java.nio.charset.Charset
+import java.util.zip.GZIPInputStream
 import kotlin.concurrent.thread
 
 object Application {
     val log = logger(FINEST)
 
-    val permittedNames = listOf("e-m-b.org")
+    private fun InputStream.readHTTPHeaders() = lineSequences()
+        .takeWhile { it.isNotBlank() }
+        .associate {
+            val (name, value) = it.split(":")
+            name to value.trim()
+        }
 
-    fun processHttpRequest(index: Int, bytes: ByteArray) = runCatching {
-        val text = bytes.toString(Charsets.US_ASCII)
+    private fun process(socket: TCPSocket) {
+        val stream = socket.inputSteam
 
-        val tokens = text.split("\r\n")
+        val line = stream.readLine()
 
-        log.finest { text }
+        if (line == "HTTP/1.1 200 OK") {
+            val headers = stream.readHTTPHeaders()
+            log.info { "Socket: $socket -> $headers" }
 
-        val (method, url, type) = tokens.first().split(" ")
+            val length = headers["Content-Length"]
+            val type = headers["Content-Type"]
+            val encoding = headers["Content-Encoding"]
 
-        when (method) {
-            "GET" -> {
-                val headers = tokens.drop(1)
-                    .filter { it.isNotBlank() }
-                    .associate {
-                        val (name, value) = it.split(":")
-                        name to value.trim()
+            log.fine { "length = $length type = $type encoding = $encoding" }
+
+            if (encoding == "gzip") {
+                val gzipArchiveSize = stream.readLine().hexAsUInt
+                log.finer { "gzipArchiveSize = $gzipArchiveSize" }
+                val gzip = stream.readNBytes(gzipArchiveSize)
+                val data = GZIPInputStream(gzip.inputStream()).readAllBytes()
+
+                if (type != null) {
+                    val mime = type.substringBefore(";")
+                    val main = mime.substringBefore("/")
+                    val secondary = mime.substringAfter("/")
+
+                    when (main) {
+                        "text" -> {
+                            val charset = type.substringAfterLast("charset=")
+                            val content = data.toString(Charset.forName(charset))
+                            log.finer { content }
+                        }
+                        "image" -> {
+                            log.finest { "IMAGE!" }
+                        }
+                        "application" -> {
+                            log.finest { "APPLICATION!" }
+                        }
                     }
-
-                val host = headers.getValue("Host")
-
-                if (host in permittedNames) {
-                    log.config { "GET -> url = $url type = $type" }
-                    log.config { headers }
                 }
-            }
-
-            "POST" -> {
-                log.config { "POST -> $text" }
             }
         }
-    }.onFailure {
-        log.severe { "Can't parse HTTP-REQUEST packet #$index due to $it\nbytes: ${bytes.hexlify(false)}" }
-    }.isSuccess
-
-    fun processHttpResponse(index: Int, bytes: ByteArray) = runCatching {
-        val text = bytes.toString(Charsets.US_ASCII)
-
-//        log.finer { text }
-
-        val tokens = text.split("\r\n")
-
-        val (type, code, status) = tokens.first().split(" ")
-
-        val headers = tokens.drop(1)
-            .takeWhile { it.isNotBlank() }
-            .associate {
-                val (name, value) = it.split(":")
-                name to value.trim()
-            }
-
-//        log.finer { text }
-        log.config { headers }
-    }.onFailure {
-        log.severe { "Can't parse HTTP-RESPONSE packet #$index due to $it\nbytes: ${bytes.hexlify(false)}" }
-    }.isSuccess
-
-    private val requiredAddress = InetSocketAddress("10.211.55.3", 54605)
+    }
 
     private val tcpTrafficParser = TCPTrafficParser()
-        .notifyNewSocket {
-            if (it.dstAddr == requiredAddress) {
-                log.severe { "Handling started ${InetSocketAddress("10.211.55.3", 54605)}" }
-                val stream = it.inputSteam
-                thread {
-                    while (true) {
-                        val bytes = stream.readNBytes(4096)
-                        log.severe { bytes.hexlify() }
-                    }
-                }
+        .notifyNewSocket { socket ->
+            if (socket.dstAddr.port == 80 || socket.srcAddr.port == 80) {
+                thread { process(socket) }
             }
         }
 
@@ -95,7 +79,7 @@ object Application {
 
         var index = 1
 
-        handle.loop(180) { packet: Packet ->
+        handle.loop(-1) { packet: Packet ->
             runCatching {
                 tcpTrafficParser.processPacket(index, packet)
                 Thread.sleep(20)
@@ -105,5 +89,7 @@ object Application {
 
             index++
         }
+
+        log.info { "Application finished" }
     }
 }
