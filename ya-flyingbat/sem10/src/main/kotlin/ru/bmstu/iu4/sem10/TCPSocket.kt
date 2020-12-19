@@ -17,11 +17,11 @@ class TCPSocket(val id: Long, val srcAddr: InetSocketAddress, val dstAddr: InetS
     fun close() = streams.forEach { it.close() }
 
     val outputStream = object : OutputStream() {
-        override fun write(b: Int) = buffer.put(byteArrayOf(b.asByte))
+        override fun write(b: Int): Unit = run { buffer.offer(byteArrayOf(b.asByte)) }
 
-        override fun write(b: ByteArray) = buffer.put(b)
+        override fun write(b: ByteArray): Unit = run { buffer.offer(b) }
 
-        override fun write(b: ByteArray, off: Int, len: Int) = buffer.put(b, off, len)
+        override fun write(b: ByteArray, off: Int, len: Int): Unit = run { buffer.offer(b, off, len) }
     }
 
     val inputSteam = object : InputStream() {

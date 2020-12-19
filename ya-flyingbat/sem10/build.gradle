@@ -24,9 +24,14 @@ dependencies {
     implementation group: 'org.pcap4j', name: 'pcap4j-core', version: '1.8.2'
     implementation group: 'org.pcap4j', name: 'pcap4j-packetfactory-static', version: '1.8.2'
 
-    compile group: 'org.daisy.libs', name: 'commons-httpclient', version: '3.1.0'
-//Thanks for using https://jar-download.com
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.14.0'
 
+    implementation group: 'org.nd4j', name: 'nd4j-api', version: '1.0.0-beta6'
+    implementation group: 'org.nd4j', name: 'nd4j-native', version: '1.0.0-beta6'
+    implementation group: 'org.nd4j', name: 'nd4j-native-platform', version: '1.0.0-beta6'
+
+    implementation group: 'org.deeplearning4j', name: 'deeplearning4j-core', version: '1.0.0-beta6'
+    implementation group: 'org.deeplearning4j', name: 'deeplearning4j-nlp', version: '1.0.0-beta6'
 }
 
 compileKotlin {

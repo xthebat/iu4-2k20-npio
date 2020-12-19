@@ -4,12 +4,13 @@ import org.pcap4j.packet.IpV4Packet
 import org.pcap4j.packet.Packet
 import org.pcap4j.packet.TcpPacket
 import ru.inforion.lab403.common.logging.FINER
+import ru.inforion.lab403.common.logging.TRACE
 import ru.inforion.lab403.common.logging.logger
 import java.net.InetSocketAddress
 
 class TCPTrafficParser {
     companion object {
-        val log = logger(FINER)
+        val log = logger(TRACE)
     }
 
     private val sockets = mutableMapOf<Long, TCPSocket>()
@@ -49,7 +50,7 @@ class TCPTrafficParser {
             }
 
             if (tcp.header.psh) {
-                log.trace { "Fragment for seq=$seq index=$index ack=$ack socket=$socket size=${tcp.payload.rawData.size}" }
+                log.debug { "Fragment for seq=$seq index=$index ack=$ack socket=$socket size=${tcp.payload.rawData.size}" }
                 socket.outputStream.write(tcp.payload.rawData)
                 return true
             }
@@ -57,9 +58,9 @@ class TCPTrafficParser {
             sockets[ack] = TCPSocket(ack, srcAddr, dstAddr).also {
                 log.finest { "Add new socket for seq=$seq index=$index ack=$ack socket=$it" }
                 check(ack !in acknowledges) { "TCPSocket with $ack already connected!" }
-                it.outputStream.write(tcp.payload.rawData)
                 acknowledges.add(ack)
                 newSocketNotifier?.invoke(it)
+                it.outputStream.write(tcp.payload.rawData)
             }
             return true
         }

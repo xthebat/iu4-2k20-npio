@@ -1,5 +1,6 @@
 package ru.bmstu.iu4.sem10
 
+import org.deeplearning4j.models.fasttext.FastText
 import org.pcap4j.core.Pcaps
 import org.pcap4j.packet.Packet
 import ru.inforion.lab403.common.extensions.hexAsUInt
@@ -9,6 +10,7 @@ import java.io.InputStream
 import java.nio.charset.Charset
 import java.util.zip.GZIPInputStream
 import kotlin.concurrent.thread
+import kotlin.system.exitProcess
 
 object Application {
     val log = logger(FINEST)
@@ -79,7 +81,7 @@ object Application {
 
         var index = 1
 
-        handle.loop(-1) { packet: Packet ->
+        handle.loop(10000) { packet: Packet ->
             runCatching {
                 tcpTrafficParser.processPacket(index, packet)
                 Thread.sleep(20)
